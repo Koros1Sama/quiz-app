@@ -44,15 +44,26 @@ const ExplanationPanel = ({ question, userAnswer }) => {
         </ul>
       </div>
 
-      {question.reference_link && (
-        <div style={{ marginTop: '1rem', paddingTop: '0.5rem', borderTop: '1px solid #e2e8f0' }}>
-            <a href={question.reference_link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-color)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span>📚</span>
-                <span>لمزيد من التفاصيل (W3Schools)</span>
+      <div style={{ marginTop: '1rem', paddingTop: '0.5rem', borderTop: '1px solid #e2e8f0' }}>
+        {question.reference_links && question.reference_links.length > 0 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <span style={{ fontWeight: 'bold', fontSize: '0.9rem', color: '#6b7280' }}>📚 المصادر (W3Schools):</span>
+            {question.reference_links.map((link, idx) => (
+              <a key={idx} href={link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-color)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>🔗</span>
+                <span>رابط {idx + 1}</span>
                 <span style={{ fontSize: '0.8em' }}>(رابط خارجي)</span>
-            </a>
-        </div>
-      )}
+              </a>
+            ))}
+          </div>
+        ) : question.reference_link ? (
+          <a href={question.reference_link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary-color)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span>📚</span>
+              <span>لمزيد من التفاصيل (W3Schools)</span>
+              <span style={{ fontSize: '0.8em' }}>(رابط خارجي)</span>
+          </a>
+        ) : null}
+      </div>
     </div>
   );
 };
