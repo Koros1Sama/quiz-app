@@ -1,0 +1,1153 @@
+{
+  "categories": [
+    {
+      "id": "w3_intro",
+      "title": "W3Schools: مقدمة ومتغيرات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_intro_1",
+          "text": "ما هي مخرجات الكود التالي؟<br><pre>$a = '1';<br>$b = &$a;<br>$b = \"2$b\";<br>echo $a;</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_variables.asp",
+          "options": [
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "تم تغيير قيمة $a لأن $b هو مرجع (Reference) لها."
+            },
+            {
+              "text": "21",
+              "isCorrect": true,
+              "explanation": "<h3>المراجع (References)</h3><p>المتغير <code>$b</code> هو مرجع لـ <code>$a</code>. أي تغيير في <code>$b</code> يؤثر مباشرة على <code>$a</code>.</p><p>عند تنفيذ <code>$b = \"2$b\";</code>، فإن PHP تقوم أولاً بتقييم الجانب الأيمن: \"2\" مدمجة مع قيمة $b الحالية (\"1\")، فتصبح النتيجة \"21\". ثم يتم تعيين هذه القيمة لـ $b (وبالتالي لـ $a).</p>"
+            },
+            {
+              "text": "2",
+              "isCorrect": false,
+              "reverse": "$b تحتوي على قيمتها القديمة داخل السلسلة النصية."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الكود صحيح ولا يوجد خطأ."
+            }
+          ]
+        },
+        {
+          "id": "h_intro_2",
+          "text": "كيف تتصرف PHP مع المتغيرات المتغيرة (Variable Variables) التالية؟<br><pre>$x = 'abc';<br>$$x = 200;<br>echo $abc;</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_variables.asp",
+          "options": [
+            {
+              "text": "Error: Undefined variable $abc",
+              "isCorrect": false,
+              "reverse": "المتغير $abc تم تعريفه ديناميكياً."
+            },
+            {
+              "text": "200",
+              "isCorrect": true,
+              "explanation": "<h3>المتغيرات المتغيرة (Variable Variables)</h3><p>الصيغة <code>$$x</code> تأخذ قيمة <code>$x</code> (وهي 'abc') وتستخدمها كاسم لمتغير جديد. إذن، <code>$$x</code> تعني فعلياً <code>$abc</code>.</p><p>لذلك، السطر <code>$$x = 200;</code> يكافئ <code>$abc = 200;</code>.</p>"
+            },
+            {
+              "text": "abc",
+              "isCorrect": false,
+              "reverse": "هذه قيمة $x، وليست قيمة $$x."
+            },
+            {
+              "text": "$abc",
+              "isCorrect": false,
+              "reverse": "هذا اسم المتغير، وليس قيمته."
+            }
+          ]
+        },
+        {
+          "id": "h_intro_3",
+          "text": "ما الفرق بين <code>const</code> و <code>define()</code> في تعريف الثوابت؟",
+          "reference_link": "https://www.w3schools.com/php/php_constants.asp",
+          "options": [
+            {
+              "text": "لا يوجد فرق",
+              "isCorrect": false,
+              "reverse": "هناك فروقات جوهرية في النطاق ووقت التنفيذ."
+            },
+            {
+              "text": "const تعمل في وقت الترجمة (Compile-time)، بينما define() تعمل في وقت التنفيذ (Runtime)",
+              "isCorrect": true,
+              "explanation": "<h3>الثوابت: const vs define</h3><ul><li><strong>const:</strong> يتم تعريفها أثناء الترجمة (Compile-time)، لذا لا يمكن استخدامها داخل جمل الشرط (if) أو الحلقات، ولكن يمكن استخدامها داخل الكلاسات (Class Constants).</li><li><strong>define():</strong> دالة تعمل أثناء التنفيذ (Runtime)، ويمكن استخدامها شرطياً، ولكنها أبطأ قليلاً ولا تعمل داخل الكلاسات (قبل PHP 5.3).</li></ul>"
+            },
+            {
+              "text": "define() أسرع من const",
+              "isCorrect": false,
+              "reverse": "العكس هو الصحيح، const أسرع قليلاً."
+            },
+            {
+              "text": "const يمكن استخدامها داخل جملة if الشرطية",
+              "isCorrect": false,
+              "reverse": "لا يمكن ذلك، لأنها تحدث قبل التنفيذ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_if_switch",
+      "title": "W3Schools: جمل الشرط (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_if_1",
+          "text": "ما هي نتيجة الكود التالي؟<br><pre>$a = 0;<br>if ($a = 5) {<br>    echo 'True';<br>} else {<br>    echo 'False';<br>}</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_if_else.asp",
+          "options": [
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": "شرط الـ if ليس مقارنة (==)، بل إسناد (=)."
+            },
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3> Assignment vs Comparison</h3><p>داخل الـ <code>if</code>، التعبير <code>$a = 5</code> هو عملية إسناد، وليس مقارنة. هذه العملية تعيد القيمة المسندة (5).</p><p>في PHP، أي رقم غير الصفر يعتبر <code>true</code>. بما أن 5 تعتبر true، فإن الشرط يتحقق ويتم طباعة 'True'.</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الإسناد داخل جملة if أمر قانوني في PHP (وإن كان غير مستحسن)."
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "لن يطبع القيمة."
+            }
+          ]
+        },
+        {
+          "id": "h_sw_1",
+          "text": "ما هي نتيجة تنفيذ switch التالية؟<br><pre>$x = '1apple';<br>switch ($x) {<br>    case 1:<br>        echo 'Int';<br>        break;<br>    case '1apple':<br>        echo 'String';<br>        break;<br>}</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_switch.asp",
+          "options": [
+            {
+              "text": "String",
+              "isCorrect": false,
+              "reverse": "في PHP 7 والأقدم، هذا لن يحدث بسبب التحويل الضمني."
+            },
+            {
+              "text": "Int",
+              "isCorrect": true,
+              "explanation": "<h3>Switch Loose Comparison</h3><p>جملة <code>switch</code> تستخدم المقارنة المرنة (<code>==</code>). في PHP (خاصة الإصدارات قبل 8.0)، عند مقارنة نص يبدأ برقم مع رقم ('1apple' == 1)، يتم تحويل النص إلى رقم، فتصبح النتيجة true للحالة الأولى.</p><p><strong>ملاحظة:</strong> في PHP 8.0، تم تغيير هذا السلوك لاستخدام مقارنة أكثر صرامة للنصوص والأرقام، ولكن في سياق الامتحانات التقليدية، هذا هو السلوك المتوقع.</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الكود صحيح."
+            },
+            {
+              "text": "لا شيء",
+              "isCorrect": false,
+              "reverse": "سيحدث تطابق."
+            }
+          ]
+        },
+        {
+          "id": "h_if_2",
+          "text": "ما نتيجة التعبير التالي؟<br><pre>echo (true ? 'true' : false ? 't' : 'f');</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp",
+          "options": [
+            {
+              "text": "true",
+              "isCorrect": false,
+              "reverse": "بسبب طريقة تجميع PHP للمعامل الثلاثي."
+            },
+            {
+              "text": "t",
+              "isCorrect": true,
+              "explanation": "<h3>Ternary Operator Stacking</h3><p>في PHP، المعامل الثلاثي (Ternary) يتم تجميعه من اليسار إلى اليمين (Left-associative)، وهذا يختلف عن معظم اللغات الأخرى.</p><p>الخطوة 1: <code>(true ? 'true' : false)</code> تقيم إلى <code>'true'</code> (لأن الشرط true).</p><p>الخطوة 2: النتيجة تصبح: <code>('true' ? 't' : 'f')</code>.</p><p>الخطوة 3: بما أن السلسلة 'true' تعتبر true، فإن النتيجة النهائية هي <code>'t'</code>.</p>"
+            },
+            {
+              "text": "f",
+              "isCorrect": false,
+              "reverse": ""
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_strings_ops",
+      "title": "W3Schools: النصوص والعمليات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_str_1",
+          "text": "ما نتيجة الكود التالي؟<br><pre>$x = 'a';<br>$x++;<br>echo $x;</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp",
+          "options": [
+            {
+              "text": "b",
+              "isCorrect": true,
+              "explanation": "<h3>Character Increment</h3><p>PHP تدعم زيادة المحارف بأسلوب Perl. عند زيادة الحرف 'a' بواحد، ينتقل للحرف التالي في الأبجدية وهو 'b'.</p><p>لو كانت القيمة 'z'، لأصبحت 'aa'.</p>"
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "يحدث هذا فقط عند الجمع الحسابي (+1)، وليس بزيادة المتغير (Inc)."
+            },
+            {
+              "text": "a1",
+              "isCorrect": false,
+              "reverse": "هذا دمج نصوص."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ]
+        },
+        {
+          "id": "h_op_1",
+          "text": "ما نتيجة الكود التالي؟<br><pre>$a = 3 * 3 % 5;</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp",
+          "options": [
+            {
+              "text": "4",
+              "isCorrect": true,
+              "explanation": "<h3>أسبقية المعاملات</h3><p>الضرب <code>*</code> وباقي القسمة <code>%</code> لهما نفس الأسبقية، ويتم التنفيذ من اليسار لليمين.</p><ol><li>3 * 3 = 9</li><li>9 % 5 = 4</li></ol>"
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "خطأ في حساب باقي القسمة."
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": ""
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ]
+        },
+        {
+          "id": "h_op_2",
+          "text": "ما نتيجة العمليات التالية؟<br><pre>$a = [1, 2];<br>$b = [3, 4, 5];<br>$c = $a + $b;<br>print_r($c);</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp",
+          "options": [
+            {
+              "text": "[1, 2, 3, 4, 5]",
+              "isCorrect": false,
+              "reverse": "هذا يحدث مع array_merge()."
+            },
+            {
+              "text": "[4, 6, 5]",
+              "isCorrect": false,
+              "reverse": "المعامل + لا يجمع القيم رياضياً."
+            },
+            {
+              "text": "[1, 2, 5]",
+              "isCorrect": true,
+              "explanation": "<h3>اتحاد المصفوفات (+)</h3><p>المعامل <code>+</code> للمصفوفات يقوم بدمج العناصر بناءً على **المفاتيح (Keys)**.</p><ul><li>المصفوفة $a تملك المفاتيح 0 و 1.</li><li>المصفوفة $b تملك المفاتيح 0، 1، و 2.</li><li>يتم أخذ 0 و1 من $a (لأنها في اليسار).</li><li>يتم أخذ 2 من $b (لأن المفتاح 2 غير موجود في $a).</li><li>المفاتيح 0 و1 في $b يتم تجاهلها لأنها موجودة مسبقاً في $a.</li></ul><p>النتيجة: [1, 2, 5].</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_loops",
+      "title": "W3Schools: الحلقات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_loop_1",
+          "text": "ما هي الخطوة الحاسمة التي يجب فعلها بعد استخدام مرجع (Reference) في حلقة foreach؟<br><pre>foreach ($arr as &$val) { ... }</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_looping_foreach.asp",
+          "options": [
+            {
+              "text": "unset($val);",
+              "isCorrect": true,
+              "explanation": "<h3>خطورة المراجع في الحلقات</h3><p>عند استخدام <code>&$val</code>، فإن المتغير <code>$val</code> يظل مرتبطاً بآخر عنصر في المصفوفة حتى بعد انتهاء الحلقة.</p><p>إذا استخدمت نفس المتغير <code>$val</code> لاحقاً، فسيؤدي ذلك لتعديل العنصر الأخير في المصفوفة دون قصد. لذا <strong>يجب</strong> استخدام <code>unset($val)</code> لفك الارتباط.</p>"
+            },
+            {
+              "text": "reset($arr);",
+              "isCorrect": false,
+              "reverse": "يعيد مؤشر المصفوفة للبداية، لكن لا يحل مشكلة ارتباط المتغير $val."
+            },
+            {
+              "text": "$val = null;",
+              "isCorrect": false,
+              "reverse": "هذا سيجعل العنصر الأخير في المصفوفة null!"
+            },
+            {
+              "text": "لا شيء مطلوب",
+              "isCorrect": false,
+              "reverse": "هذا خطأ شائع يؤدي لـ bugs يصعب اكتشافها."
+            }
+          ]
+        },
+        {
+          "id": "h_loop_2",
+          "text": "كم مرة سيتم طباعة 'Hello'؟<br><pre>for ($i = 0; $i < 3; $i++) {<br>    continue 1;<br>    echo 'Hello';<br>}</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_looping.asp",
+          "options": [
+            {
+              "text": "0",
+              "isCorrect": true,
+              "explanation": "<h3>continue</h3><p>الأمر <code>continue</code> يقفز فوراً إلى الدورة التالية (Increment then Condition)، متخطياً أي كود تحته في البلوك الحالي. وبما أن <code>echo</code> تأتي بعد <code>continue</code> مباشرة، فلن تنفذ أبداً.</p>"
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": "سيتم تخطي الطباعة في كل مرة."
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "لن تنفذ أبداً."
+            },
+            {
+              "text": "Infinite Loop",
+              "isCorrect": false,
+              "reverse": "$i تزداد بشكل طبيعي."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_functions_arrays",
+      "title": "W3Schools: الدوال والمصفوفات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_func_1",
+          "text": "ما الذي سيطبعه الكود التالي؟<br><pre>function test() {<br>    static $count = 0;<br>    $count++;<br>    echo $count;<br>}<br>test();<br>test();<br>test();</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_variables_scope.asp",
+          "options": [
+            {
+              "text": "111",
+              "isCorrect": false,
+              "reverse": "لو لم يكن static، لكانت النتيجة كذلك."
+            },
+            {
+              "text": "123",
+              "isCorrect": true,
+              "explanation": "<h3>المتغيرات الستاتيكية (Static Variables)</h3><p>المتغير المعرف بـ <code>static</code> داخل الدالة لا يفقد قيمته بعد انتهاء الدالة. يحتفظ بآخر قيمة له للاستدعاء التالي.</p>"
+            },
+            {
+              "text": "012",
+              "isCorrect": false,
+              "reverse": "الزيادة تحدث قبل الطباعة."
+            },
+            {
+              "text": "333",
+              "isCorrect": false,
+              "reverse": "يطبع القيمة في كل استدعاء."
+            }
+          ]
+        },
+        {
+          "id": "h_arr_1",
+          "text": "ما هي المفاتيح (Keys) الناتجة في المصفوفة التالية؟<br><pre>$arr = [<br>    1 => 'a',<br>    '1' => 'b',<br>    1.5 => 'c',<br>    true => 'd'<br>];</pre>",
+          "reference_link": "https://www.w3schools.com/php/php_arrays.asp",
+          "options": [
+            {
+              "text": "أربعة مفاتيح: 1, '1', 1.5, true",
+              "isCorrect": false,
+              "reverse": "PHP لا تسمح بتكرار المفاتيح وتقوم بتحويلها."
+            },
+            {
+              "text": "مفتاح واحد فقط: 1 وقيمته 'd'",
+              "isCorrect": true,
+              "explanation": "<h3>تحويل مفاتيح المصفوفات (Key Casting)</h3><p>في PHP:</p><ul><li>النص '1' يتحول للرقم 1.</li><li>الرقم العشري 1.5 يتحول للصحيح 1 (Truncation).</li><li>المنطقي true يتحول للرقم 1.</li></ul><p>بما أن جميع المفاتيح تحولت لـ <code>1</code>، فإن كل قيمة جديدة تطغى (Overwrite) على السابقة. القيمة الأخيرة 'd' هي التي تبقى.</p>"
+            },
+            {
+              "text": "مفتاحان: 1 و 1.5",
+              "isCorrect": false,
+              "reverse": "1.5 تتحول لـ 1."
+            },
+            {
+              "text": "خطأ (Error)",
+              "isCorrect": false,
+              "reverse": "PHP تسمح بإعادة تعريف المفاتيح (Overwriting)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prev_exam",
+      "title": "الامتحانات السابقة (2025) - مع شرح مفصل",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Which function in PHP is used to check if a variable is an integer?",
+          "options": [
+            {
+              "text": "is_integer()",
+              "isCorrect": false,
+              "reverse": "رغم أن <code>is_integer()</code> هي اسم مستعار (Alias) لـ <code>is_int()</code>، إلا أن استخدام الدالة الأصلية <code>is_int()</code> هو الممارسة المفضلة والأكثر وضوحاً في الكود."
+            },
+            {
+              "text": "is_int()",
+              "isCorrect": true,
+              "explanation": "<h3>is_int()</h3><p>هذه هي الدالة المعيارية والأكثر استخداماً للتحقق من نوع البيانات. تعيد <code>true</code> إذا كان المتغير من نوع عدد صحيح (integer)، و <code>false</code> لغير ذلك (حتى لو كان نصاً يحتوي على رقم مثل '5').</p>"
+            },
+            {
+              "text": "check_int()",
+              "isCorrect": false,
+              "reverse": "هذه الدالة غير موجودة في مكتبة PHP القياسية. محاولة استخدامها ستؤدي لخطأ 'Call to undefined function'."
+            },
+            {
+              "text": "validate_int()",
+              "isCorrect": false,
+              "reverse": "غير موجودة. للتحقق من صحة البيانات (Validation) نستخدم عادة <code>filter_var()</code> مع الفلتر <code>FILTER_VALIDATE_INT</code>."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_numbers.asp"
+        },
+        {
+          "id": 2,
+          "text": "Function to check if a variable is undefined or null?",
+          "options": [
+            {
+              "text": "isset()",
+              "isCorrect": true,
+              "explanation": "<h3>isset()</h3><p>هذه الدالة مصممة تحديداً لغرضين:</p><ol><li>التحقق مما إذا كان المتغير قد تم تعريفه (Declared).</li><li>التحقق من أن قيمته ليست <code>NULL</code>.</li></ol><p>إذا كان المتغير غير موجود، أو موجود وقيمته NULL، فإنها تعيد <code>false</code>. في الحالات الأخرى تعيد <code>true</code>.</p>"
+            },
+            {
+              "text": "is_null()",
+              "isCorrect": false,
+              "reverse": "تقوم فقط بفحص ما إذا كانت القيمة <code>NULL</code>، ولكنها ستصدر تحذيراً (Warning) إذا كان المتغير غير معرف أصلاً."
+            },
+            {
+              "text": "empty()",
+              "isCorrect": false,
+              "reverse": "تتحقق مما إذا كان المتغير 'فارغاً'. الصفر 0، والنص الفارغ \"\"، و false، و null كلها تعتبر فارغة بالنسبة لـ <code>empty()</code>، لذا فهي ليست دقيقة لفحص الوجود فقط."
+            },
+            {
+              "text": "is_defined()",
+              "isCorrect": false,
+              "reverse": "لا توجد دالة بهذا الاسم في PHP. للثوابت نستخدم <code>defined()</code>، وللمتغيرات نستخدم <code>isset()</code>."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_variables.asp"
+        },
+        {
+          "id": 3,
+          "text": "Which of the following serves as the opening and closing tags for PHP code blocks?",
+          "options": [
+            {
+              "text": "&lt;php &gt;",
+              "isCorrect": false,
+              "reverse": "هذه صيغة خاطئة تماماً. المفسر لن يتعرف عليها وسيعتبرها نصاً عادياً أو وسماً غير معروف."
+            },
+            {
+              "text": "&lt;?php ?&gt;",
+              "isCorrect": true,
+              "explanation": "<h3>وسوم PHP القياسية</h3><p><code>&lt;?php</code> هو وسم الفتح، ويخبر السيرفر ببدء تفسير الكود كـ PHP.<br><code>?&gt;</code> هو وسم الإغلاق. هذا هو المعيار العالمي الذي يعمل على جميع السيرفرات بجميع الإعدادات.</p>"
+            },
+            {
+              "text": "&lt;? ?&gt;",
+              "isCorrect": false,
+              "reverse": "تسمى 'Short Tags'. رغم أنها قد تعمل إذا تم تفعيل خيار <code>short_open_tag</code> في ملف php.ini، إلا أنها غير مفضلة لأنها قد تتعارض مع تعليمات XML ولا تعمل على كل السيرفرات."
+            },
+            {
+              "text": "&lt; &gt;",
+              "isCorrect": false,
+              "reverse": "هذه مجرد أقواس زاوية تستخدم في HTML، ولا علاقة لها ببدء كود PHP."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_syntax.asp"
+        },
+        {
+          "id": 4,
+          "text": "Function in PHP used to delete a file?",
+          "options": [
+            {
+              "text": "delete()",
+              "isCorrect": false,
+              "reverse": "اسم شائع في لغات أخرى أو SQL، لكنه غير مستخدم لحذف الملفات في PHP."
+            },
+            {
+              "text": "remove()",
+              "isCorrect": false,
+              "reverse": "غير موجودة كدالة قياسية."
+            },
+            {
+              "text": "unlink()",
+              "isCorrect": true,
+              "explanation": "<h3>unlink()</h3><p>الاسم مشتق من نظام ملفات Unix، حيث يتم 'فك الارتباط' (un-linking) للملف من الدليل.<br>الاستخدام: <code>unlink('filename.txt');</code>. تعيد true عند النجاح و false عند الفشل.</p>"
+            },
+            {
+              "text": "clear()",
+              "isCorrect": false,
+              "reverse": "غير موجودة."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_file_open.asp"
+        },
+        {
+          "id": 5,
+          "text": "Function used to open a file in PHP?",
+          "options": [
+            {
+              "text": "open_file()",
+              "isCorrect": false,
+              "reverse": "تسمية غير صحيحة."
+            },
+            {
+              "text": "fopen()",
+              "isCorrect": true,
+              "explanation": "<h3>fopen()</h3><p>اختصار لـ 'File Open'. تستقبل هذه الدالة مسار الملف والوضع (Mode) الذي تريد فتح الملف به (مثلاً 'r' للقراءة، 'w' للكتابة).<br>مثال: <code>$file = fopen('web.txt', 'r');</code></p>"
+            },
+            {
+              "text": "read_file()",
+              "isCorrect": false,
+              "reverse": "هناك دالة اسمها <code>readfile()</code> (بدون underscore) ولكنها تقوم بقراءة الملف وإخراج محتواه فوراً للمتصفح، ولا تعيد مقبض (Handle) للتحكم بالملف."
+            },
+            {
+              "text": "file_open()",
+              "isCorrect": false,
+              "reverse": "غير موجودة."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_file_open.asp"
+        },
+        {
+          "id": 6,
+          "text": "Correct way to define a constant in PHP?",
+          "options": [
+            {
+              "text": "const NAME = value;",
+              "isCorrect": false,
+              "reverse": "صيغة صحيحة، ولكنها تستخدم عادة في النطاق العام (Global Scope) أو داخل الكلاسات، وهي تحدث في وقت الترجمة. في سياق السؤال العام، <code>define()</code> هي الدالة المذكورة غالباً."
+            },
+            {
+              "text": "define(\"NAME\", value);",
+              "isCorrect": true,
+              "explanation": "<h3>define()</h3><p>هذه الدالة تقوم بتعريف ثابت في وقت التشغيل (Runtime).<br>المعامل الأول هو اسم الثابت (نص)، والثاني هو القيمة.<br>مثال: <code>define(\"PI\", 3.14);</code>.</p>"
+            },
+            {
+              "text": "constant NAME = value;",
+              "isCorrect": false,
+              "reverse": "كلمة constant ليست كلمة مفتاحية للتعريف."
+            },
+            {
+              "text": "var NAME = value;",
+              "isCorrect": false,
+              "reverse": "<code>var</code> تستخدم لتعريف متغيرات الكلاس (Properties)، والمتغيرات تتغير قيمتها، عكس الثوابت."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_constants.asp"
+        },
+        {
+          "id": 7,
+          "text": "Variable names in PHP must start with?",
+          "options": [
+            {
+              "text": "@",
+              "isCorrect": false,
+              "reverse": "علامة @ تستخدم لتجاهل الأخطاء (Error Suppression) قبل التعبيرات."
+            },
+            {
+              "text": "#",
+              "isCorrect": false,
+              "reverse": "تستخدم للتعليقات (Comments)."
+            },
+            {
+              "text": "$",
+              "isCorrect": true,
+              "explanation": "<h3>علامة الدولار $</h3><p>في PHP، هذا شرط إجباري. المفسر يبحث عن علامة <code>$</code> ليعرف أن ما يليها هو اسم متغير.<br>مثال: <code>$age = 25;</code></p>"
+            },
+            {
+              "text": "%",
+              "isCorrect": false,
+              "reverse": "تستخدم لعملية باقي القسمة (Modulus)."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_variables.asp"
+        },
+        {
+          "id": 8,
+          "text": "Loop used to iterate over arrays?",
+          "options": [
+            {
+              "text": "for",
+              "isCorrect": false,
+              "reverse": "يمكن استخدام <code>for</code> مع المصفوفات الرقمية (Indexed Arrays) عبر عداد <code>$i</code>، لكنها صعبة ومعقدة مع المصفوفات الترابطية (Associative Arrays)."
+            },
+            {
+              "text": "while",
+              "isCorrect": false,
+              "reverse": "حلقة عامة، وتتطلب إدارة يدوية للمؤشر (Pointer) للمرور على المصفوفة."
+            },
+            {
+              "text": "foreach",
+              "isCorrect": true,
+              "explanation": "<h3>foreach loop</h3><p>صُممت هذه الحلقة خصيصاً للمصفوفات والكائنات. هي تقوم تلقائياً بالمرور على كل عنصر دون الحاجة لعداد.<br>الصيغة: <code>foreach ($array as $key => $val)</code>.</p>"
+            },
+            {
+              "text": "do-while",
+              "isCorrect": false,
+              "reverse": "حلقة عامة، تنفذ مرة واحدة على الأقل."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_looping_foreach.asp"
+        },
+        {
+          "id": 9,
+          "text": "Superglobal array used to get data from a form with method='post'?",
+          "options": [
+            {
+              "text": "$_GET",
+              "isCorrect": false,
+              "reverse": "تستخدم لجمع البيانات المرسلة عبر URL Parameters أو النماذج بـ method='get'."
+            },
+            {
+              "text": "$_POST",
+              "isCorrect": true,
+              "explanation": "<h3>$_POST</h3><p>عندما يرسل النموذج بياناته بطريقة <code>method=\"post\"</code>، فإن PHP تستقبل هذه البيانات وتخزنها في مصفوفة <code>$_POST</code>. تتميز بأن البيانات لا تظهر في شريط العنوان (URL) وهي أكثر أماناً للبيانات الحساسة.</p>"
+            },
+            {
+              "text": "$_REQUEST",
+              "isCorrect": false,
+              "reverse": "تحتوي على بيانات $_GET و $_POST و $_COOKIE مجتمعة، ولكن السؤال حدد 'method=post' بدقة، لذا $_POST هي الإجابة الأصح والأكثر تحديداً."
+            },
+            {
+              "text": "$_SERVER",
+              "isCorrect": false,
+              "reverse": "تحتوي على معلومات حول السيرفر والمسارات والهيدرز، وليس مدخلات المستخدم."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_superglobals_post.asp"
+        },
+        {
+          "id": 10,
+          "text": "Function to include a file, stopping execution if not found?",
+          "options": [
+            {
+              "text": "include()",
+              "isCorrect": false,
+              "reverse": "تقوم بتضمين الملف، لكن إذا لم تجده، تصدر فقط تحذيراً (Warning E_WARNING) ويستمر السكربت في العمل. هذا قد يسبب مشاكل لاحقة."
+            },
+            {
+              "text": "require()",
+              "isCorrect": true,
+              "explanation": "<h3>require()</h3><p>كما يوحي الاسم (مطلوب)، هذه الدالة تجعل الملف إلزامياً. إذا لم يتم العثور عليه، تصدر PHP خطأ قاتلاً (Fatal Error E_COMPILE_ERROR) ويتوقف تنفيذ السكربت فوراً.</p>"
+            },
+            {
+              "text": "import()",
+              "isCorrect": false,
+              "reverse": "توجد في لغات مثل Java أو Python، وليست في PHP."
+            },
+            {
+              "text": "load()",
+              "isCorrect": false,
+              "reverse": "غير موجودة."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_includes.asp"
+        },
+        {
+          "id": 11,
+          "text": "Output of <code>$x = 5; echo $x++ + $x++;</code>?",
+          "options": [
+            {
+              "text": "10",
+              "isCorrect": false,
+              "reverse": "هذا يحدث إذا لم تتغير قيمة x بين الجمعين."
+            },
+            {
+              "text": "11",
+              "isCorrect": true,
+              "explanation": "<h3>تحليل Post-Inc ($x++)</h3><ol><li>الحد الأول <code>$x++</code>: يستخدم القيمة الحالية (<strong>5</strong>) ثم يزيد $x لتصبح 6.</li><li>الحد الثاني <code>$x++</code>: يستخدم القيمة الحالية الجديدة (<strong>6</strong>) ثم يزيد $x لتصبح 7.</li><li>العملية: 5 + 6 = <strong>11</strong>.</li></ol>"
+            },
+            {
+              "text": "12",
+              "isCorrect": false,
+              "reverse": "هذا يحدث لو استخدمنا Pre-Inc (++$x) في الحالتين (6+7=13) أو مزيج."
+            },
+            {
+              "text": "55",
+              "isCorrect": false,
+              "reverse": "جمع نصي؟ لا."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp"
+        },
+        {
+          "id": 12,
+          "text": "Symbol used for single-line comments in PHP?",
+          "options": [
+            {
+              "text": "//",
+              "isCorrect": true,
+              "explanation": "<h3>التعليقات</h3><p>في PHP، السطر الذي يبدأ بـ <code>//</code> يعتبر تعليقاً ولا يتم تنفيذه. كما يمكن استخدام الرمز <code>#</code> لنفس الغرض.</p>"
+            },
+            {
+              "text": "/ * * /",
+              "isCorrect": false,
+              "reverse": "هذا رمز بداية ونهاية التعليقات متعددة الأسطر (Multi-line)."
+            },
+            {
+              "text": "&lt;!-- --&gt;",
+              "isCorrect": false,
+              "reverse": "هذه تعليقات HTML، وتظهر في الـ Source Code للصفحة، عكس تعليقات PHP التي لا تخرج للمتصفح."
+            },
+            {
+              "text": "**",
+              "isCorrect": false,
+              "reverse": "معامل الأس."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_comments.asp"
+        },
+        {
+          "id": 13,
+          "text": "Correct way to connect to MySQL database using MySQLi?",
+          "options": [
+            {
+              "text": "mysql_connect()",
+              "isCorrect": false,
+              "reverse": "هذه الدالة (القديمة) تم إلغاؤها (Removed) من PHP 7.0+. استخدامها يسبب خطأ فادحاً."
+            },
+            {
+              "text": "new mysqli()",
+              "isCorrect": true,
+              "explanation": "<h3>MySQLi (MySQL Improved)</h3><p>الطريقة الحديثة هي إنشاء كائن جديد من كلاس <code>mysqli</code>.<br>مثال: <code>$conn = new mysqli($host, $user, $pass, $db);</code></p>"
+            },
+            {
+              "text": "db_connect()",
+              "isCorrect": false,
+              "reverse": "غير قياسية."
+            },
+            {
+              "text": "connect_mysql()",
+              "isCorrect": false,
+              "reverse": "غير قياسية."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_mysql_connect.asp"
+        },
+        {
+          "id": 14,
+          "text": "Function to get the length of a string?",
+          "options": [
+            {
+              "text": "count()",
+              "isCorrect": false,
+              "reverse": "تستخدم لحساب عدد عناصر المصفوفة (Array)."
+            },
+            {
+              "text": "length()",
+              "isCorrect": false,
+              "reverse": "تستخدم في JavaScript خاصية (.length) أو في Java دالة (.length()). في PHP لا تعمل."
+            },
+            {
+              "text": "strlen()",
+              "isCorrect": true,
+              "explanation": "<h3>strlen()</h3><p>اختصار لـ String Length. تعيد عدد البايتات في السلسلة.<br>مثال: <code>strlen(\"Hello\")</code> تعيد 5.</p>"
+            },
+            {
+              "text": "str_count()",
+              "isCorrect": false,
+              "reverse": "غير موجودة. هناك <code>str_word_count</code> لعد الكلمات."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_string.asp"
+        },
+        {
+          "id": 15,
+          "text": "Function to replace text within a string?",
+          "options": [
+            {
+              "text": "str_replace()",
+              "isCorrect": true,
+              "explanation": "<h3>str_replace()</h3><p>تقوم بالبحث عن نص واستبداله بآخر.<br>الصيغة: <code>str_replace(find, replace, subject)</code>.</p>"
+            },
+            {
+              "text": "replace()",
+              "isCorrect": false,
+              "reverse": "غير موجودة في PHP (موجودة في JS)."
+            },
+            {
+              "text": "str_change()",
+              "isCorrect": false,
+              "reverse": "غير موجودة."
+            },
+            {
+              "text": "text_replace()",
+              "isCorrect": false,
+              "reverse": "غير موجودة."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_string.asp"
+        },
+        {
+          "id": 16,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>define(\"GREETING\", \"PHP is a scripting language\");<br>echo $GREETING;<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "$GREETING",
+              "isCorrect": false,
+              "reverse": "PHP تتعامل مع المتغيرات غير المعرفة بطباعة تنبيه (Warning)."
+            },
+            {
+              "text": "PHP is a scripting language",
+              "isCorrect": false,
+              "reverse": "لكي يطبع هذه الجملة، يجب أن نكتب <code>echo GREETING;</code> (بدون علامة $). الثوابت لا تستخدم $."
+            },
+            {
+              "text": "GREETING",
+              "isCorrect": false,
+              "reverse": "لا."
+            },
+            {
+              "text": "Running the code: <span class='ltr'>$var;</span> (undefined variable)",
+              "isCorrect": true,
+              "explanation": "<h3>خطأ شائع: الثوابت والمتغيرات</h3><p>تم تعريف ثابت اسمه <code>GREETING</code>. الثوابت تستخدم كما هي، بدون <code>$</code>.</p><p>عند كتابة <code>$GREETING</code>، فإن PHP تبحث عن <strong>متغير</strong> بهذا الاسم، وهو غير موجود (Undefined Variable)، لذا لن يطبع قيمة الثابت."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_constants.asp"
+        },
+        {
+          "id": 17,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace; white-space: pre-wrap;'>&lt;?php<br>function multi($num)<br>{<br>  $ans = $num * $num;<br>  return $ans;<br>}<br>echo multi(5) * 2;<br>echo stripos(\"Hello php\", \"PHP\");<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "50 6",
+              "isCorrect": true,
+              "explanation": "<h3>تحليل الخطوات</h3><ol><li>استدعاء <code>multi(5)</code>: 5 * 5 = 25.</li><li>ضرب النتيجة في 2: 25 * 2 = <strong>50</strong>.</li><li>دالة <code>stripos</code>: تبحث عن \"PHP\" داخل \"Hello php\". البحث غير حساس للحالة (Case-insensitive).</li><li>موقع كلمة PHP يبدأ عند الحرف السادس (H=0, e=1, ... space=5, p=6). النتيجة <strong>6</strong>.</li></ol>"
+            },
+            {
+              "text": "50 0",
+              "isCorrect": false,
+              "reverse": "الموقع 0 هو بداية الجملة (حرف H)."
+            },
+            {
+              "text": "25 6",
+              "isCorrect": false,
+              "reverse": "تجاهل الضرب في 2 الموجود خارج الدالة."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الكود سليم."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_functions.asp"
+        },
+        {
+          "id": 18,
+          "text": "PHP is an object-oriented programming language?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3>OOP Support</h3><p>نعم، PHP تدعم البرمجة كائنية التوجه بشكل كامل (Classes, Objects, Inheritance, Interfaces, Traits, Polymorphism) خاصة منذ الإصدار PHP 5.</p>"
+            },
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_oop_what_is.asp"
+        },
+        {
+          "id": 19,
+          "text": "What is the result? <code>echo 10 % 3;</code>",
+          "options": [
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": "هذا ناتج القسمة الصحيحة."
+            },
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "<h3>باقي القسمة (Modulus)</h3><p>العملية % تعطي الباقي من عملية القسمة.<br>10 تقسيم 3 يساوي 3، والباقي هو <strong>1</strong> (لان 3*3=9، و 10-9=1).</p>"
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "الباقي ليس صفراً لأن 10 لا تقبل القسمة على 3."
+            },
+            {
+              "text": "10",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp"
+        },
+        {
+          "id": 20,
+          "text": "Operator used to concatenate strings?",
+          "options": [
+            {
+              "text": "+",
+              "isCorrect": false,
+              "reverse": "هذا للجمع الحسابي. لو استخدمته مع نصوص، ستحاول PHP تحويل النصوص لأرقام."
+            },
+            {
+              "text": ".",
+              "isCorrect": true,
+              "explanation": "في PHP، النقطة <code>.</code> هي المعامل الوحيد لدمج السلاسل النصية."
+            },
+            {
+              "text": "&",
+              "isCorrect": false,
+              "reverse": "هذا معامل Bitwise AND."
+            },
+            {
+              "text": "*",
+              "isCorrect": false,
+              "reverse": "معامل الضرب."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp"
+        },
+        {
+          "id": 21,
+          "text": "Which of these is NOT a comparison operator?",
+          "options": [
+            {
+              "text": "==",
+              "isCorrect": false,
+              "reverse": "مقارنة المساواة (القيمة فقط)."
+            },
+            {
+              "text": "!=",
+              "isCorrect": false,
+              "reverse": "مقارنة عدم المساواة."
+            },
+            {
+              "text": "=",
+              "isCorrect": true,
+              "explanation": "<h3>الإسناد vs المقارنة</h3><p>الرمز <code>=</code> (يساوي واحد) يستخدم <strong>لتعيين</strong> قيمة للمتغير (Assignment Operator).<br>أما المقارنة فتستخدم <code>==</code> أو <code>===</code>.</p>"
+            },
+            {
+              "text": "===",
+              "isCorrect": false,
+              "reverse": "مقارنة التطابق (القيمة والنوع)."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp"
+        },
+        {
+          "id": 22,
+          "text": "Abstraction is a concept where we hide implementation details and show only functionality?",
+          "options": [
+            {
+              "text": "Encapsulation",
+              "isCorrect": false,
+              "reverse": "Encapsulation (التغليف) هو وضع البيانات والدوال في كبسولة واحدة وحماية البيانات."
+            },
+            {
+              "text": "Abstraction",
+              "isCorrect": true,
+              "explanation": "<h3>Abstraction (التجريد)</h3><p>هو المفهوم الذي يركز على 'ماذا يفعل الكائن' بدلاً من 'كيف يفعله'، وذلك عبر إخفاء التعقيدات الداخلية وتوفير واجهة بسيطة للاستخدام.</p>"
+            },
+            {
+              "text": "Polymorphism",
+              "isCorrect": false,
+              "reverse": "Polymorphism (تعدد الأشكال) هو قدرة كائنات مختلفة على الاستجابة لنفس الدالة بطرق مختلفة."
+            },
+            {
+              "text": "None",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_oop_classes_abstract.asp"
+        },
+        {
+          "id": 23,
+          "text": "Variables that are always available in all scopes?",
+          "options": [
+            {
+              "text": "Middle variables",
+              "isCorrect": false,
+              "reverse": "غير صحيح."
+            },
+            {
+              "text": "Superglobal variables",
+              "isCorrect": true,
+              "explanation": "<h3>Superglobals</h3><p>هي متغيرات معرفة مسبقاً في PHP ويمكن الوصول إليها من أي مكان في الكود (دوال، كلاسات، ملفات خارجية) دون الحاجة لجعلها global.<br>أمثلة: $_GET, $_POST, $_SESSION.</p>"
+            },
+            {
+              "text": "Local variables",
+              "isCorrect": false,
+              "reverse": "المتغيرات المحلية تكون متاحة فقط داخل الدالة التي عرفت فيها."
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_superglobals.asp"
+        },
+        {
+          "id": 24,
+          "text": "OOP is used to make large programs more complicated?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": false,
+              "reverse": "مفهوم خاطئ."
+            },
+            {
+              "text": "False",
+              "isCorrect": true,
+              "explanation": "<h3>الغرض من OOP</h3><p>على العكس، OOP تهدف لتبسيط البرامج الكبيرة عبر تقسيمها إلى أجزاء صغيرة (كائنات) قابلة لإعادة الاستخدام والإدارة، مما يقلل من تكرار الكود ويسهل الصيانة.</p>"
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_oop_what_is.asp"
+        },
+        {
+          "id": 25,
+          "text": "$GLOBALS superglobal is used to access global variables from anywhere?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3>$GLOBALS</h3><p>نعم، هي مصفوفة تحتوي على جميع المتغيرات المعرفة في النطاق العام (Global Scope)، ويمكن عبرها الوصول لتلك المتغيرات وتعديلها من داخل الدوال.</p>"
+            },
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_superglobals_globals.asp"
+        },
+        {
+          "id": 26,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace; white-space: pre-wrap;'>&lt;?php<br>$x = 10;<br>$y = 20;<br>if ($x &gt; $y && 1||1)<br>    print \"1000 PHP MCQ\";<br>else<br>    print \"Welcome to Sanfoundry\";<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "no output",
+              "isCorrect": false,
+              "reverse": ""
+            },
+            {
+              "text": "Welcome to Sanfoundry",
+              "isCorrect": false,
+              "reverse": "لو كان الشرط النهائي false."
+            },
+            {
+              "text": "1000 PHP MCQ",
+              "isCorrect": true,
+              "explanation": "<h3>أولوية العمليات المنطقية</h3><p>ترتيب الأولويات: <code>&&</code> أعلى من <code>||</code>.</p><ol><li>يتم تقييم <code>$x > $y</code> أولاً. (10 > 20) = <strong>False</strong>.</li><li>يتم تقييم الجزء المرتبط بـ &&: <code>False && 1</code> = <strong>False</strong>.</li><li>يتم تقييم الجزء المرتبط بـ ||: <code>False || 1</code> = <strong>True</strong>.</li></ol><p>الشرط النهائي هو True، لذا يتم طباعة الجملة الأولى.</p>"
+            },
+            {
+              "text": "error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_operators.asp"
+        },
+        {
+          "id": 27,
+          "text": "Sessions are less reliable and secure than cookies?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": false,
+              "reverse": "الكوكيز تخزن عند المستخدم ويمكن سرقتها أو تعديلها بسهولة."
+            },
+            {
+              "text": "False",
+              "isCorrect": true,
+              "explanation": "<h3>الأمان: Sessions vs Cookies</h3><p>الجلسات (Sessions) تخزن البيانات الحساسة على السيرفر، بينما الكوكيز تخزنها على متصفح المستخدم. لذلك الجلسات أكثر أماناً وموثوقية.</p>"
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_sessions.asp"
+        },
+        {
+          "id": 28,
+          "text": "What is the output of the following?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace; white-space: pre-wrap;'>&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&lt;body&gt;<br><br>&lt;?php<br>$str = \"Visit yemen\";<br>$pattern = \"/Yemen/i\";<br>echo preg_match($pattern, $str);<br>?&gt;<br><br>&lt;/body&gt;<br>&lt;/html&gt;</code>",
+          "options": [
+            {
+              "text": "Visit yemen",
+              "isCorrect": false,
+              "reverse": "preg_match تعيد 1 أو 0 (عدد مرات التطابق)، أو false عند الخطأ."
+            },
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "<h3>Regular Expressions</h3><p>النمط <code>/Yemen/i</code> يحتوي على المعدل <code>i</code> مما يجعله غير حساس لحالة الأحرف (Case-Insensitive).<br>لذلك، كلمة \"Yemen\" في النمط تطابق \"yemen\" في النص. الدالة تعيد 1 لوجود تطابق.</p>"
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "لو أزلنا حرف i من النمط، كانت النتيجة ستكون 0."
+            },
+            {
+              "text": "error or warning",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/php/php_regex.asp"
+        },
+        {
+          "id": 29,
+          "text": "Any domain you like you could have in order to be available in the network even its already registered?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": false,
+              "reverse": "لا يمكنك تسجيل نطاق يملكه شخص آخر."
+            },
+            {
+              "text": "False",
+              "isCorrect": true,
+              "explanation": "<h3>نظام أسماء النطاقات (DNS)</h3><p>النطاقات هي عناوين فريدة عالمياً. إذا كان النطاق مسجلاً بالفعل، لا يمكنك استخدامه إلا إذا اشتريته من المالك أو انتهت فترة حجزه.</p>"
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/whatis/whatis_dns.asp"
+        },
+        {
+          "id": 30,
+          "text": "Once we have a domain registered and a web hosting plan set up, we need to configure the domain to point to the web host?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3>ربط النطاق بالاستضافة</h3><p>نعم، يجب تحديث سجلات خادم الأسماء (Nameservers) أو سجلات A Record في لوحة تحكم النطاق لتربطه بعنوان IP الخاص بخادم الاستضافة، ليعرف الزوار أين يوجد موقعك عند كتابة النطاق.</p>"
+            },
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/whatis/whatis_dns.asp"
+        },
+        {
+          "id": 31,
+          "text": "We use FTP to transfer website files from local computer to remote web server?",
+          "options": [
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3>FTP (File Transfer Protocol)</h3><p>هو البروتوكول القياسي المستخدم لرفع ملفات الموقع (HTML, PHP, الصور) من جهاز المطور إلى السيرفر ليصبح الموقع متاحاً على الإنترنت.</p>"
+            },
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_link": "https://www.w3schools.com/whatis/whatis_ftp.asp"
+        }
+      ]
+    }
+  ]
+}
