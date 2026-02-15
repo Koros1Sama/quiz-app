@@ -1,0 +1,2409 @@
+{
+  "categories": [
+    {
+      "id": "w3_intro",
+      "title": "W3Schools: مقدمة ومتغيرات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_intro_1",
+          "text": "ما هي مخرجات الكود التالي؟<br><pre>$a = '1';<br>$b = &$a;<br>$b = \"2$b\";<br>echo $a;</pre>",
+          "options": [
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "تم تغيير قيمة $a لأن $b هو مرجع (Reference) لها."
+            },
+            {
+              "text": "21",
+              "isCorrect": true,
+              "explanation": "<h3>المراجع (References)</h3><p>المتغير <code>$b</code> هو مرجع لـ <code>$a</code>. أي تغيير في <code>$b</code> يؤثر مباشرة على <code>$a</code>.</p><p>عند تنفيذ <code>$b = \"2$b\";</code>، فإن PHP تقوم أولاً بتقييم الجانب الأيمن: \"2\" مدمجة مع قيمة $b الحالية (\"1\")، فتصبح النتيجة \"21\". ثم يتم تعيين هذه القيمة لـ $b (وبالتالي لـ $a).</p>"
+            },
+            {
+              "text": "2",
+              "isCorrect": false,
+              "reverse": "$b تحتوي على قيمتها القديمة داخل السلسلة النصية."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الكود صحيح ولا يوجد خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables.asp"
+          ]
+        },
+        {
+          "id": "h_intro_2",
+          "text": "كيف تتصرف PHP مع المتغيرات المتغيرة (Variable Variables) التالية؟<br><pre>$x = 'abc';<br>$$x = 200;<br>echo $abc;</pre>",
+          "options": [
+            {
+              "text": "Error: Undefined variable $abc",
+              "isCorrect": false,
+              "reverse": "المتغير $abc تم تعريفه ديناميكياً."
+            },
+            {
+              "text": "200",
+              "isCorrect": true,
+              "explanation": "<h3>المتغيرات المتغيرة (Variable Variables)</h3><p>الصيغة <code>$$x</code> تأخذ قيمة <code>$x</code> (وهي 'abc') وتستخدمها كاسم لمتغير جديد. إذن، <code>$$x</code> تعني فعلياً <code>$abc</code>.</p><p>لذلك، السطر <code>$$x = 200;</code> يكافئ <code>$abc = 200;</code>.</p>"
+            },
+            {
+              "text": "abc",
+              "isCorrect": false,
+              "reverse": "هذه قيمة $x، وليست قيمة $$x."
+            },
+            {
+              "text": "$abc",
+              "isCorrect": false,
+              "reverse": "هذا اسم المتغير، وليس قيمته."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables.asp"
+          ]
+        },
+        {
+          "id": "h_intro_3",
+          "text": "ما الفرق بين <code>const</code> و <code>define()</code> في تعريف الثوابت؟",
+          "options": [
+            {
+              "text": "لا يوجد فرق",
+              "isCorrect": false,
+              "reverse": "هناك فروقات جوهرية في النطاق ووقت التنفيذ."
+            },
+            {
+              "text": "const تعمل في وقت الترجمة (Compile-time)، بينما define() تعمل في وقت التنفيذ (Runtime)",
+              "isCorrect": true,
+              "explanation": "<h3>الثوابت: const vs define</h3><ul><li><strong>const:</strong> يتم تعريفها أثناء الترجمة (Compile-time)، لذا لا يمكن استخدامها داخل جمل الشرط (if) أو الحلقات، ولكن يمكن استخدامها داخل الكلاسات (Class Constants).</li><li><strong>define():</strong> دالة تعمل أثناء التنفيذ (Runtime)، ويمكن استخدامها شرطياً، ولكنها أبطأ قليلاً ولا تعمل داخل الكلاسات (قبل PHP 5.3).</li></ul>"
+            },
+            {
+              "text": "define() أسرع من const",
+              "isCorrect": false,
+              "reverse": "العكس هو الصحيح، const أسرع قليلاً."
+            },
+            {
+              "text": "const يمكن استخدامها داخل جملة if الشرطية",
+              "isCorrect": false,
+              "reverse": "لا يمكن ذلك، لأنها تحدث قبل التنفيذ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_constants.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_if_switch",
+      "title": "W3Schools: جمل الشرط (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_if_1",
+          "text": "ما هي نتيجة الكود التالي؟<br><pre>$a = 0;<br>if ($a = 5) {<br>    echo 'True';<br>} else {<br>    echo 'False';<br>}</pre>",
+          "options": [
+            {
+              "text": "False",
+              "isCorrect": false,
+              "reverse": "شرط الـ if ليس مقارنة (==)، بل إسناد (=)."
+            },
+            {
+              "text": "True",
+              "isCorrect": true,
+              "explanation": "<h3> Assignment vs Comparison</h3><p>داخل الـ <code>if</code>، التعبير <code>$a = 5</code> هو عملية إسناد، وليس مقارنة. هذه العملية تعيد القيمة المسندة (5).</p><p>في PHP، أي رقم غير الصفر يعتبر <code>true</code>. بما أن 5 تعتبر true، فإن الشرط يتحقق ويتم طباعة 'True'.</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الإسناد داخل جملة if أمر قانوني في PHP (وإن كان غير مستحسن)."
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "لن يطبع القيمة."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_if_else.asp"
+          ]
+        },
+        {
+          "id": "h_sw_1",
+          "text": "ما هي نتيجة تنفيذ switch التالية؟<br><pre>$x = '1apple';<br>switch ($x) {<br>    case 1:<br>        echo 'Int';<br>        break;<br>    case '1apple':<br>        echo 'String';<br>        break;<br>}</pre>",
+          "options": [
+            {
+              "text": "String",
+              "isCorrect": false,
+              "reverse": "في PHP 7 والأقدم، هذا لن يحدث بسبب التحويل الضمني."
+            },
+            {
+              "text": "Int",
+              "isCorrect": true,
+              "explanation": "<h3>Switch Loose Comparison</h3><p>جملة <code>switch</code> تستخدم المقارنة المرنة (<code>==</code>). في PHP (خاصة الإصدارات قبل 8.0)، عند مقارنة نص يبدأ برقم مع رقم ('1apple' == 1)، يتم تحويل النص إلى رقم، فتصبح النتيجة true للحالة الأولى.</p><p><strong>ملاحظة:</strong> في PHP 8.0، تم تغيير هذا السلوك لاستخدام مقارنة أكثر صرامة للنصوص والأرقام، ولكن في سياق الامتحانات التقليدية، هذا هو السلوك المتوقع.</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "الكود صحيح."
+            },
+            {
+              "text": "لا شيء",
+              "isCorrect": false,
+              "reverse": "سيحدث تطابق."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_switch.asp"
+          ]
+        },
+        {
+          "id": "h_if_2",
+          "text": "ما نتيجة التعبير التالي؟<br><pre>echo (true ? 'true' : false ? 't' : 'f');</pre>",
+          "options": [
+            {
+              "text": "true",
+              "isCorrect": false,
+              "reverse": "بسبب طريقة تجميع PHP للمعامل الثلاثي."
+            },
+            {
+              "text": "t",
+              "isCorrect": true,
+              "explanation": "<h3>Ternary Operator Stacking</h3><p>في PHP، المعامل الثلاثي (Ternary) يتم تجميعه من اليسار إلى اليمين (Left-associative)، وهذا يختلف عن معظم اللغات الأخرى.</p><p>الخطوة 1: <code>(true ? 'true' : false)</code> تقيم إلى <code>'true'</code> (لأن الشرط true).</p><p>الخطوة 2: النتيجة تصبح: <code>('true' ? 't' : 'f')</code>.</p><p>الخطوة 3: بما أن السلسلة 'true' تعتبر true، فإن النتيجة النهائية هي <code>'t'</code>.</p>"
+            },
+            {
+              "text": "f",
+              "isCorrect": false,
+              "reverse": ""
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_strings_ops",
+      "title": "W3Schools: النصوص والعمليات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_str_1",
+          "text": "ما نتيجة الكود التالي؟<br><pre>$x = 'a';<br>$x++;<br>echo $x;</pre>",
+          "options": [
+            {
+              "text": "b",
+              "isCorrect": true,
+              "explanation": "<h3>Character Increment</h3><p>PHP تدعم زيادة المحارف بأسلوب Perl. عند زيادة الحرف 'a' بواحد، ينتقل للحرف التالي في الأبجدية وهو 'b'.</p><p>لو كانت القيمة 'z'، لأصبحت 'aa'.</p>"
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "يحدث هذا فقط عند الجمع الحسابي (+1)، وليس بزيادة المتغير (Inc)."
+            },
+            {
+              "text": "a1",
+              "isCorrect": false,
+              "reverse": "هذا دمج نصوص."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp"
+          ]
+        },
+        {
+          "id": "h_op_1",
+          "text": "ما نتيجة الكود التالي؟<br><pre>$a = 3 * 3 % 5;</pre>",
+          "options": [
+            {
+              "text": "4",
+              "isCorrect": true,
+              "explanation": "<h3>أسبقية المعاملات</h3><p>الضرب <code>*</code> وباقي القسمة <code>%</code> لهما نفس الأسبقية، ويتم التنفيذ من اليسار لليمين.</p><ol><li>3 * 3 = 9</li><li>9 % 5 = 4</li></ol>"
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "خطأ في حساب باقي القسمة."
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": ""
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp"
+          ]
+        },
+        {
+          "id": "h_op_2",
+          "text": "ما نتيجة العمليات التالية؟<br><pre>$a = [1, 2];<br>$b = [3, 4, 5];<br>$c = $a + $b;<br>print_r($c);</pre>",
+          "options": [
+            {
+              "text": "[1, 2, 3, 4, 5]",
+              "isCorrect": false,
+              "reverse": "هذا يحدث مع array_merge()."
+            },
+            {
+              "text": "[4, 6, 5]",
+              "isCorrect": false,
+              "reverse": "المعامل + لا يجمع القيم رياضياً."
+            },
+            {
+              "text": "[1, 2, 5]",
+              "isCorrect": true,
+              "explanation": "<h3>اتحاد المصفوفات (+)</h3><p>المعامل <code>+</code> للمصفوفات يقوم بدمج العناصر بناءً على **المفاتيح (Keys)**.</p><ul><li>المصفوفة $a تملك المفاتيح 0 و 1.</li><li>المصفوفة $b تملك المفاتيح 0، 1، و 2.</li><li>يتم أخذ 0 و1 من $a (لأنها في اليسار).</li><li>يتم أخذ 2 من $b (لأن المفتاح 2 غير موجود في $a).</li><li>المفاتيح 0 و1 في $b يتم تجاهلها لأنها موجودة مسبقاً في $a.</li></ul><p>النتيجة: [1, 2, 5].</p>"
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": ""
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_loops",
+      "title": "W3Schools: الحلقات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_loop_1",
+          "text": "ما هي الخطوة الحاسمة التي يجب فعلها بعد استخدام مرجع (Reference) في حلقة foreach؟<br><pre>foreach ($arr as &$val) { ... }</pre>",
+          "options": [
+            {
+              "text": "unset($val);",
+              "isCorrect": true,
+              "explanation": "<h3>خطورة المراجع في الحلقات</h3><p>عند استخدام <code>&$val</code>، فإن المتغير <code>$val</code> يظل مرتبطاً بآخر عنصر في المصفوفة حتى بعد انتهاء الحلقة.</p><p>إذا استخدمت نفس المتغير <code>$val</code> لاحقاً، فسيؤدي ذلك لتعديل العنصر الأخير في المصفوفة دون قصد. لذا <strong>يجب</strong> استخدام <code>unset($val)</code> لفك الارتباط.</p>"
+            },
+            {
+              "text": "reset($arr);",
+              "isCorrect": false,
+              "reverse": "يعيد مؤشر المصفوفة للبداية، لكن لا يحل مشكلة ارتباط المتغير $val."
+            },
+            {
+              "text": "$val = null;",
+              "isCorrect": false,
+              "reverse": "هذا سيجعل العنصر الأخير في المصفوفة null!"
+            },
+            {
+              "text": "لا شيء مطلوب",
+              "isCorrect": false,
+              "reverse": "هذا خطأ شائع يؤدي لـ bugs يصعب اكتشافها."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_looping_foreach.asp"
+          ]
+        },
+        {
+          "id": "h_loop_2",
+          "text": "كم مرة سيتم طباعة 'Hello'؟<br><pre>for ($i = 0; $i < 3; $i++) {<br>    continue 1;<br>    echo 'Hello';<br>}</pre>",
+          "options": [
+            {
+              "text": "0",
+              "isCorrect": true,
+              "explanation": "<h3>continue</h3><p>الأمر <code>continue</code> يقفز فوراً إلى الدورة التالية (Increment then Condition)، متخطياً أي كود تحته في البلوك الحالي. وبما أن <code>echo</code> تأتي بعد <code>continue</code> مباشرة، فلن تنفذ أبداً.</p>"
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": "سيتم تخطي الطباعة في كل مرة."
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "لن تنفذ أبداً."
+            },
+            {
+              "text": "Infinite Loop",
+              "isCorrect": false,
+              "reverse": "$i تزداد بشكل طبيعي."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_looping.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "w3_functions_arrays",
+      "title": "W3Schools: الدوال والمصفوفات (مستوى متقدم)",
+      "questions": [
+        {
+          "id": "h_func_1",
+          "text": "ما الذي سيطبعه الكود التالي؟<br><pre>function test() {<br>    static $count = 0;<br>    $count++;<br>    echo $count;<br>}<br>test();<br>test();<br>test();</pre>",
+          "options": [
+            {
+              "text": "111",
+              "isCorrect": false,
+              "reverse": "لو لم يكن static، لكانت النتيجة كذلك."
+            },
+            {
+              "text": "123",
+              "isCorrect": true,
+              "explanation": "<h3>المتغيرات الستاتيكية (Static Variables)</h3><p>المتغير المعرف بـ <code>static</code> داخل الدالة لا يفقد قيمته بعد انتهاء الدالة. يحتفظ بآخر قيمة له للاستدعاء التالي.</p>"
+            },
+            {
+              "text": "012",
+              "isCorrect": false,
+              "reverse": "الزيادة تحدث قبل الطباعة."
+            },
+            {
+              "text": "333",
+              "isCorrect": false,
+              "reverse": "يطبع القيمة في كل استدعاء."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": "h_arr_1",
+          "text": "ما هي المفاتيح (Keys) الناتجة في المصفوفة التالية؟<br><pre>$arr = [<br>    1 => 'a',<br>    '1' => 'b',<br>    1.5 => 'c',<br>    true => 'd'<br>];</pre>",
+          "options": [
+            {
+              "text": "أربعة مفاتيح: 1, '1', 1.5, true",
+              "isCorrect": false,
+              "reverse": "PHP لا تسمح بتكرار المفاتيح وتقوم بتحويلها."
+            },
+            {
+              "text": "مفتاح واحد فقط: 1 وقيمته 'd'",
+              "isCorrect": true,
+              "explanation": "<h3>تحويل مفاتيح المصفوفات (Key Casting)</h3><p>في PHP:</p><ul><li>النص '1' يتحول للرقم 1.</li><li>الرقم العشري 1.5 يتحول للصحيح 1 (Truncation).</li><li>المنطقي true يتحول للرقم 1.</li></ul><p>بما أن جميع المفاتيح تحولت لـ <code>1</code>، فإن كل قيمة جديدة تطغى (Overwrite) على السابقة. القيمة الأخيرة 'd' هي التي تبقى.</p>"
+            },
+            {
+              "text": "مفتاحان: 1 و 1.5",
+              "isCorrect": false,
+              "reverse": "1.5 تتحول لـ 1."
+            },
+            {
+              "text": "خطأ (Error)",
+              "isCorrect": false,
+              "reverse": "PHP تسمح بإعادة تعريف المفاتيح (Overwriting)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "previous_exam_1",
+      "title": "Previous Exam 1",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Which function in PHP is used to check if a variable is an integer?",
+          "options": [
+            {
+              "text": "is_integer()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يعتبر (Alias) للاسم الأساسي. (السيناريو البديل: يعمل برمجياً كاسم بديل، لكن is_int هو الاسم القياسي والمفضل)."
+            },
+            {
+              "text": "is_int()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن هذه هي الدالة القياسية (Canonical Function) في PHP للتحقق مما إذا كان المتغير عدداً صحيحاً."
+            },
+            {
+              "text": "check_int()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن هذه الدالة غير موجودة في PHP. (السيناريو البديل: لو قمت بتعريف دالة مخصصة بهذا الاسم)."
+            },
+            {
+              "text": "validate_int()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها دالة غير معرفة. (السيناريو البديل: يمكن استخدام filter_var مع FILTER_VALIDATE_INT للتحقق من القيم)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_numbers.asp",
+            "https://www.w3schools.com/php/func_var_is_int.asp"
+          ]
+        },
+        {
+          "id": 2,
+          "text": "Which PHP function returns the number of elements in an array?",
+          "options": [
+            {
+              "text": "count()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن دالة count() مخصصة لحساب عدد العناصر داخل المصفوفات أو الكائنات."
+            },
+            {
+              "text": "length()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه لا توجد دالة بهذا الاسم للمصفوفات. (السيناريو البديل: في JavaScript نستخدم length)."
+            },
+            {
+              "text": "size()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها كانت اسماً بديلاً لـ count() ولكنها حذفت. (السيناريو البديل: لو كنا نستخدم دالة sizeof() فهي لا تزال تعمل كبديل)."
+            },
+            {
+              "text": "array_length()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الاسم غير موجود. (السيناريو البديل: هذا الاسم شائع في لغات أخرى ولكن ليس في PHP)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp",
+            "https://www.w3schools.com/php/func_array_count.asp"
+          ]
+        },
+        {
+          "id": 3,
+          "text": "Which function is used to get the current date in PHP?",
+          "options": [
+            {
+              "text": "date()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن دالة date() تقوم بتنسيق التاريخ والوقت الحاليين بناءً على التنسيق المطلوب (Timestamp)."
+            },
+            {
+              "text": "current_date()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها غير موجودة. (السيناريو البديل: في SQL نستخدم CURDATE())."
+            },
+            {
+              "text": "today()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها غير موجودة. (السيناريو البديل: بعض مكتبات الوقت قد تستخدم مصطلحات مشابهة)."
+            },
+            {
+              "text": "get_date()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة الصحيحة هي getdate() (بدون شرطة سفلية) والتي تعيد مصفوفة وليس نصاً منسقاً. (السيناريو البديل: لو استخدمت getdate() لاسترجاع مصفوفة معلومات الوقت)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_date.asp"
+          ]
+        },
+        {
+          "id": 4,
+          "text": "Which of the following is NOT a valid PHP data type?",
+          "options": [
+            {
+              "text": "String",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه نوع بيانات صالح للنصوص. (السيناريو البديل: يكون الجواب صحيحاً إذا سألنا عن أنواع البيانات المدعومة)."
+            },
+            {
+              "text": "Boolean",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه نوع بيانات صالح للقيم المنطقية. (السيناريو البديل: السؤال يبحث عن غير الصالح)."
+            },
+            {
+              "text": "Float",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه نوع بيانات صالح للأرقام العشرية. (السيناريو البديل: السؤال يبحث عن غير الصالح)."
+            },
+            {
+              "text": "Character",
+              "isCorrect": true,
+              "explanation": "صحيح لأن PHP لا تملك نوع بيانات مخصصاً للحرف الواحد (char) كما في C++ أو Java؛ الحروف تعامل كنصوص (String)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_datatypes.asp"
+          ]
+        },
+        {
+          "id": 5,
+          "text": "Which PHP function is used to search for a string in another string?",
+          "options": [
+            {
+              "text": "search_string()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة غير موجودة. (السيناريو البديل: لو تم تعريف دالة خاصة)."
+            },
+            {
+              "text": "strpos()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن strpos (String Position) تبحث عن أول ظهور لنص داخل نص آخر وتعيد موقعه الرقمي."
+            },
+            {
+              "text": "find_string()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة غير موجودة. (السيناريو البديل: غير منطبق)."
+            },
+            {
+              "text": "substring_search()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة غير موجودة. (السيناريو البديل: يمكن استخدام strstr للبحث واسترجاع الجزء المتبقي)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_string.asp",
+            "https://www.w3schools.com/php/func_string_strpos.asp"
+          ]
+        },
+        {
+          "id": 6,
+          "text": "Which function is used to sort an array in PHP in reverse order?",
+          "options": [
+            {
+              "text": "sort()",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها ترتب تصاعدياً. (السيناريو البديل: تستخدم للترتيب من A إلى Z)."
+            },
+            {
+              "text": "rsort()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن حرف r يرمز لـ Reverse، فتقوم بترتيب المصفوفة تنازلياً (من الأكبر للأصغر)."
+            },
+            {
+              "text": "reverse_sort()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة غير موجودة. (السيناريو البديل: غير منطبق)."
+            },
+            {
+              "text": "array_reverse()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن هذه الدالة تعكس ترتيب العناصر فقط (الأخير يصبح الأول) ولا تقوم بعملية فرز (Sorting) حسب القيمة. (السيناريو البديل: لو أردنا قلب المصفوفة دون الاهتمام بقيم العناصر)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays_sort.asp"
+          ]
+        },
+        {
+          "id": 7,
+          "text": "Which of the following is not a PHP superglobal?",
+          "options": [
+            {
+              "text": "$_GLOBALS",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه متغير فائق (Superglobal). (السيناريو البديل: السؤال يطلب المتغير غير الصحيح)."
+            },
+            {
+              "text": "$_ENV",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه متغير فائق للبيئة. (السيناريو البديل: السؤال يطلب المتغير غير الصحيح)."
+            },
+            {
+              "text": "$_URL",
+              "isCorrect": true,
+              "explanation": "صحيح لأن $_URL ليس متغيراً فائقاً معرفاً مسبقاً في PHP. (المتغيرات الصحيحة تشمل $_GET, $_POST, $_REQUEST, etc)."
+            },
+            {
+              "text": "$_SERVER",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه متغير فائق لمعلومات الخادم. (السيناريو البديل: السؤال يطلب المتغير غير الصحيح)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_superglobals.asp"
+          ]
+        },
+        {
+          "id": 8,
+          "text": "Which of the following PHP functions is used to include a file and stop execution if the file is missing?",
+          "options": [
+            {
+              "text": "include",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يصدر تحذيراً (Warning) فقط ويكمل التنفيذ. (السيناريو البديل: يكون صحيحاً لو أردنا استمرار البرنامج رغم غياب الملف)."
+            },
+            {
+              "text": "require",
+              "isCorrect": true,
+              "explanation": "صحيح لأن require تطلب الملف إلزامياً، وإذا لم تجده توقف السكربت عن العمل (Fatal Error)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_includes.asp"
+          ]
+        },
+        {
+          "id": 9,
+          "text": "What is the difference between include and require in PHP?",
+          "options": [
+            {
+              "text": "require stops script execution on failure, while include does not",
+              "isCorrect": true,
+              "explanation": "صحيح لأن require تنتج Fatal Error (توقف تام)، بينما include تنتج Warning (تنبيه) ويستمر الكود."
+            },
+            {
+              "text": "include stops execution, while require does not",
+              "isCorrect": false,
+              "reverse": "خطأ لأن العكس هو الصحيح. (السيناريو البديل: لا يوجد)."
+            },
+            {
+              "text": "Both stop execution on failure",
+              "isCorrect": false,
+              "reverse": "خطأ لأن include لا توقف التنفيذ. (السيناريو البديل: لو استخدمنا require في الحالتين)."
+            },
+            {
+              "text": "There is no difference",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الفرق الجوهري هو في التعامل مع الأخطاء. (السيناريو البديل: كلاهما يجلب الملفات، لكن السلوك عند الخطأ مختلف)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_includes.asp"
+          ]
+        },
+        {
+          "id": 10,
+          "text": "Which of the following functions is used to remove whitespaces from both ends of a string?",
+          "options": [
+            {
+              "text": "trim()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن trim تقوم بإزالة المسافات، الأسطر الجديدة، وعلامات التبويب من بداية ونهاية النص."
+            },
+            {
+              "text": "strip()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدالة غير موجودة في PHP (موجودة في Python). (السيناريو البديل: في Python نستخدم strip)."
+            },
+            {
+              "text": "remove_spaces()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الاسم غير موجود. (السيناريو البديل: يمكن برمجة دالة بهذا الاسم يدوياً)."
+            },
+            {
+              "text": "clean()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الاسم غير موجود. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/func_string_trim.asp"
+          ]
+        },
+        {
+          "id": 11,
+          "text": "What will echo \"2\" + \"3\"; output in PHP?",
+          "options": [
+            {
+              "text": "\"23\"",
+              "isCorrect": false,
+              "reverse": "خطأ لأن علامة الجمع (+) في PHP مخصصة للعمليات الحسابية وليس لدمج النصوص. (السيناريو البديل: لو استخدمنا النقطة (.) ستكون النتيجة \"23\")."
+            },
+            {
+              "text": "5",
+              "isCorrect": true,
+              "explanation": "صحيح لأن PHP تحول النصوص التي تحتوي على أرقام إلى أعداد (Implicit Casting) عند استخدام العمليات الحسابية."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ لأن PHP لغة مرنة الأنواع (Loosely Typed) وتحول النصوص لأرقام تلقائياً. (السيناريو البديل: لو كانت النصوص تحتوي حروفاً غير رقمية في PHP 8+ قد يحدث خطأ)."
+            },
+            {
+              "text": "\"5\"",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الناتج هو قيمة رقمية (Integer) وليس نصاً، رغم أن الطباعة قد تبدو متشابهة. (السيناريو البديل: لو استخدمنا var_dump سنرى النوع int)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp",
+            "https://www.w3schools.com/php/php_numbers.asp"
+          ]
+        },
+        {
+          "id": 12,
+          "text": "What is the main purpose of PDO in PHP?",
+          "options": [
+            {
+              "text": "It is a framework for handling frontend PHP applications",
+              "isCorrect": false,
+              "reverse": "خطأ لأن PDO مخصص لقواعد البيانات وليس للواجهة الأمامية. (السيناريو البديل: Laravel أو React)."
+            },
+            {
+              "text": "It only works with MySQL databases",
+              "isCorrect": false,
+              "reverse": "خطأ لأن PDO يدعم 12 نوعاً مختلفاً من قواعد البيانات. (السيناريو البديل: MySQLi هو الذي يدعم MySQL فقط)."
+            },
+            {
+              "text": "It allows PHP to interact with databases and it's the best method of connection",
+              "isCorrect": true,
+              "explanation": "صحيح لأن (PHP Data Objects) توفر واجهة موحدة وآمنة للتعامل مع قواعد بيانات متعددة."
+            },
+            {
+              "text": "It replaces MySQLi as the only option for database interaction",
+              "isCorrect": false,
+              "reverse": "خطأ لأن MySQLi لا يزال مدعوماً ومستخدماً. (السيناريو البديل: PDO هو خيار مفضل للمرونة لكن ليس الوحيد)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_pdo.asp"
+          ]
+        },
+        {
+          "id": 13,
+          "text": "How can you create an indexed array in PHP?",
+          "options": [
+            {
+              "text": "$arr = array(\"apple\", \"banana\", \"cherry\");",
+              "isCorrect": false,
+              "reverse": "خطأ في سياق هذا السؤال لأنه وضع خياراً آخر أكثر شمولاً، لكن هذه الجملة بحد ذاتها صحيحة. (السيناريو البديل: الخيار الثالث يجمع الطريقتين)."
+            },
+            {
+              "text": "$arr[\"apple\", \"banana\", \"cherry\"];",
+              "isCorrect": false,
+              "reverse": "خطأ في الصياغة (Syntax Error). (السيناريو البديل: يجب استخدام [] أو array() للتعريف)."
+            },
+            {
+              "text": "$arr = array(\"apple\", \"banana\", \"cherry\"); or $arr = [\"apple\", \"banana\", \"cherry\"];",
+              "isCorrect": true,
+              "explanation": "صحيح لأنه يوضح الطريقة التقليدية `array()` والطريقة المختصرة `[]` المتاحة منذ PHP 5.4."
+            },
+            {
+              "text": "None of the above",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الخيار الثالث صحيح. (السيناريو البديل: لا يوجد)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp"
+          ]
+        },
+        {
+          "id": 14,
+          "text": "To prevent SQL injection from occurring, we use",
+          "options": [
+            {
+              "text": "prepared statements",
+              "isCorrect": false,
+              "reverse": "هذا جزء من الحل الصحيح، لكن الخيار 'All of the above' أشمل. (السيناريو البديل: إذا كان الخيار الوحيد المتاح)."
+            },
+            {
+              "text": "bind parameter",
+              "isCorrect": false,
+              "reverse": "هذا جزء من الحل الصحيح، لكن الخيار 'All of the above' أشمل. (السيناريو البديل: ربط المعاملات هو جزء من عملية Prepared Statements)."
+            },
+            {
+              "text": "All of the above",
+              "isCorrect": true,
+              "explanation": "صحيح لأن Prepared Statements تعتمد على فكرة فصل الكود عن البيانات، ويتم ذلك عبر bind parameters لضمان عدم تنفيذ المدخلات كأوامر SQL."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_mysql_prepared_statements.asp"
+          ]
+        },
+        {
+          "id": 15,
+          "text": "which function converts special characters to HTML entities",
+          "options": [
+            {
+              "text": "stripslashes() function",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها تزيل الشرطات المائلة فقط. (السيناريو البديل: تستخدم لتنظيف البيانات بعد الهروب (escaping))."
+            },
+            {
+              "text": "htmlspecialchars() function",
+              "isCorrect": true,
+              "explanation": "صحيح لأن هذه الدالة تحول الرموز مثل < و > إلى &lt; و &gt; لمنع تنفيذ كود HTML أو JavaScript خبيث."
+            },
+            {
+              "text": "trim() function",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها تزيل المسافات فقط. (السيناريو البديل: تستخدم لتنظيف الحواف)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/func_string_htmlspecialchars.asp",
+            "https://www.w3schools.com/php/php_form_validation.asp"
+          ]
+        },
+        {
+          "id": 16,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>define(\"GREETING\", \"PHP is a scripting language\");<br>echo SGREETING;<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "$GREETING",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الثوابت لا تبدأ بـ $. (السيناريو البديل: لو كان متغيراً عادياً)."
+            },
+            {
+              "text": "warning or error",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الكود يحاول طباعة `SGREETING` (بدون $) وهو غير معرف كمتغير أو ثابت، كما أنه مكتوب بشكل خاطئ (حرف S زائد)."
+            },
+            {
+              "text": "PHP is a scripting language",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الاسم المستدعى `SGREETING` لا يطابق اسم الثابت `GREETING`. (السيناريو البديل: لو كتبنا echo GREETING;)."
+            },
+            {
+              "text": "GREETING",
+              "isCorrect": false,
+              "reverse": "خطأ، في نسخ PHP القديمة كان يطبع الاسم نفسه مع تحذير، ولكن في PHP 8+ يعطي خطأ قاتلاً (Fatal Error). (السيناريو البديل: PHP 7.x)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_constants.asp"
+          ]
+        },
+        {
+          "id": 17,
+          "text": "What is the output of the program? ... stripos(\"I love php...\", \"PHP\"); multi($str); ...",
+          "options": [
+            {
+              "text": "Correct Answer",
+              "isCorrect": false,
+              "reverse": "خطأ لأن stripos تعيد 7، والشرط 19 غير متحقق. (السيناريو البديل: لو كان موقع الكلمة 19)."
+            },
+            {
+              "text": "Is The",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الرقم 8 غير مطابق. (السيناريو البديل: لو كان الموقع 8)."
+            },
+            {
+              "text": "I Wonder",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الرقم 3 غير مطابق. (السيناريو البديل: لو كان الموقع 3)."
+            },
+            {
+              "text": "Which One",
+              "isCorrect": true,
+              "explanation": "صحيح لأن جملة `I love ` تتكون من 7 أحرف (بما في ذلك المسافات)، وكلمة `php` تبدأ في الفهرس 7. الدالة `stripos` تعيد 7، والشرط `$num==7` يتحقق."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/func_string_stripos.asp"
+          ]
+        },
+        {
+          "id": 18,
+          "text": "DNS servers are responsible for translating domain names to numeric IP addresses, leading website visitors to the correct website.",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، نظام DNS يعمل كدليل الهاتف للإنترنت، محولاً الأسماء البشرية (google.com) إلى عناوين IP رقمية."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن هذا هو التعريف الأساسي لعمل DNS. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/whatis/whatis_dns.asp"
+          ]
+        },
+        {
+          "id": 19,
+          "text": "Object-Oriented Programming is a method for decomposing the program into modules",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، البرمجة كائنية التوجه (OOP) تقوم بتقسيم البرنامج إلى وحدات (Classes/Objects) قابلة لإعادة الاستخدام لتنظيم الكود."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن التجزئة (Decomposition) هي جوهر OOP. (السيناريو البديل: البرمجة الإجرائية Procedural تركز على الدوال)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_oop_what_is.asp"
+          ]
+        },
+        {
+          "id": 20,
+          "text": "The constructor is a method that get at the moment of objects creation",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، دالة `__construct()` يتم استدعاؤها تلقائياً فور إنشاء كائن جديد (Instance) من الفئة."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن المُشيد (Constructor) مصمم خصيصاً للعمل عند الإنشاء. (السيناريو البديل: Destructor يعمل عند انتهاء الكائن)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_oop_constructor.asp"
+          ]
+        },
+        {
+          "id": 21,
+          "text": "Prepared Statements protect website from SQL injection, and very important for web application security.",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، لأنها ترسل الاستعلام والبيانات بشكل منفصل لقاعدة البيانات، مما يمنع المهاجم من التلاعب بهيكلية الاستعلام."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها خط الدفاع الأول ضد حقن SQL. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_mysql_prepared_statements.asp"
+          ]
+        },
+        {
+          "id": 22,
+          "text": "which concept is a view or representation of an entity that includes only the most significant attributes",
+          "options": [
+            {
+              "text": "Inheritance",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الوراثة تعني نقل الصفات من الأب للابن. (السيناريو البديل: وراثة الكود)."
+            },
+            {
+              "text": "abstraction",
+              "isCorrect": true,
+              "explanation": "صحيح، التجريد (Abstraction) يعني إخفاء التفاصيل المعقدة وإظهار الخصائص المهمة فقط للمستخدم."
+            },
+            {
+              "text": "Dynamic binding",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يتعلق بربط الدوال وقت التشغيل. (السيناريو البديل: Polymorphism)."
+            },
+            {
+              "text": "Nothing from the above",
+              "isCorrect": false,
+              "reverse": "خطأ لأن التجريد هو الإجابة. (السيناريو البديل: لا يوجد)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_oop_classes_abstract.asp"
+          ]
+        },
+        {
+          "id": 23,
+          "text": "variables that are always available in all scopes classified as",
+          "options": [
+            {
+              "text": "middle variables",
+              "isCorrect": false,
+              "reverse": "خطأ، لا يوجد مصطلح كهذا في PHP. (السيناريو البديل: غير منطبق)."
+            },
+            {
+              "text": "Superglobal variables",
+              "isCorrect": true,
+              "explanation": "صحيح، المتغيرات الفائقة (مثل $_POST, $_GET) متاحة في أي مكان في السكربت دون الحاجة لتعريفها كـ global."
+            },
+            {
+              "text": "local variables",
+              "isCorrect": false,
+              "reverse": "خطأ لأنها متاحة فقط داخل الدالة التي عرفت فيها. (السيناريو البديل: لو عرفت داخل دالة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_superglobals.asp"
+          ]
+        },
+        {
+          "id": 24,
+          "text": "Object-Oriented programming (OOP) is used to make large programs more complicated",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": false,
+              "reverse": "خطأ، الهدف من OOP هو تبسيط البرامج الكبيرة وجعلها أكثر تنظيماً وقابلية للصيانة. (السيناريو البديل: الكود السيء قد يعقد الأمور، لكن المبدأ هو التبسيط)."
+            },
+            {
+              "text": "False.",
+              "isCorrect": true,
+              "explanation": "صحيح، OOP تهدف لتقليل التعقيد عبر التنظيم (Modular structure)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_oop_what_is.asp"
+          ]
+        },
+        {
+          "id": 25,
+          "text": "$GLOBALS superglobal that is used to access global variables from anywhere in the PHP script",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، $GLOBALS هي مصفوفة تحتوي على جميع المتغيرات العامة ويمكن الوصول إليها من داخل الدوال."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن هذه هي وظيفة $GLOBALS الأساسية. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_superglobals_globals.asp"
+          ]
+        },
+        {
+          "id": 26,
+          "text": "What is the output of the program? if($x>$y && 1/1) ... ($x=10, $y=20)",
+          "options": [
+            {
+              "text": "no output",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يوجد جملة طباعة في كلا الحالتين. (السيناريو البديل: لو كانت الدالة فارغة)."
+            },
+            {
+              "text": "Welcome to Sanfoundry",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الشرط `$x > $y` (أي 10 > 20) هو False. وبما أن الرابط هو &&، فإن الشرط الكلي يصبح False، فينتقل التنفيذ لـ else."
+            },
+            {
+              "text": "1000 PHP MCQ",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الشرط الأول لم يتحقق. (السيناريو البديل: لو كانت $x=30)."
+            },
+            {
+              "text": "error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم نحوياً. (السيناريو البديل: وجود خطأ في الكتابة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_if_else.asp"
+          ]
+        },
+        {
+          "id": 27,
+          "text": "Sessions are less reliable and secure than cookies",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": false,
+              "reverse": "خطأ، الجلسات (Sessions) تخزن البيانات على الخادم وهي أكثر أماناً من الكوكيز التي تخزن عند المستخدم ويمكن التلاعب بها. (السيناريو البديل: الكوكيز مفيدة للاحتفاظ بالبيانات لفترة طويلة بعد إغلاق المتصفح)."
+            },
+            {
+              "text": "False.",
+              "isCorrect": true,
+              "explanation": "صحيح، لأن الجلسات تخزن البيانات في السيرفر ولا يمكن للمستخدم تعديلها مباشرة، عكس الكوكيز."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_sessions.asp",
+            "https://www.w3schools.com/php/php_cookies.asp"
+          ]
+        },
+        {
+          "id": 28,
+          "text": "What is the output of the following?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$str = \"Visit yemen\";<br>$pattern = \"/Yemen/i\";<br>echo preg_match($pattern, $str);<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "Visit yemen",
+              "isCorrect": false,
+              "reverse": "خطأ لأن preg_match تعيد 1 أو 0 (وجد أو لم يوجد). (السيناريو البديل: preg_replace أو دالة استخراج)."
+            },
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "صحيح لأن النمط `/Yemen/i` يحتوي على `i` (case-insensitive)، فكلمة `Yemen` تطابق `yemen` في النص، فتعيد الدالة 1 (True)."
+            },
+            {
+              "text": "0",
+              "isCorrect": false,
+              "reverse": "خطأ لأن المطابقة ناجحة. (السيناريو البديل: لو لم نستخدم المعدل i وكان البحث حساساً لحالة الأحرف)."
+            },
+            {
+              "text": "error or warning",
+              "isCorrect": false,
+              "reverse": "خطأ الكود سليم. (السيناريو البديل: خطأ في صياغة الـ Regex)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_regex.asp"
+          ]
+        },
+        {
+          "id": 29,
+          "text": "Any domain you like you could have in order to be aviable in the network even its already registered before in DNS.",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": false,
+              "reverse": "خطأ، أسماء النطاقات (Domains) فريدة عالمياً. لا يمكن تسجيل نطاق مسجل مسبقاً لشخص آخر. (السيناريو البديل: يمكنك شراء النطاق من مالكه)."
+            },
+            {
+              "text": "False.",
+              "isCorrect": true,
+              "explanation": "صحيح، يجب أن يكون النطاق متاحاً وغير مسجل لكي تحصل عليه."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/whatis/whatis_dns.asp"
+          ]
+        },
+        {
+          "id": 30,
+          "text": "Once we have a domain registered and a web hosting plan set up, we need to configure the domain to point to the web host.",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، يجب ربط الدومين بالاستضافة عبر إعدادات DNS (Nameservers) ليعرف الزوار أين يقع موقعك."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الدومين والاستضافة كيانان منفصلان يجب ربطهما. (السيناريو البديل: لو اشتريتهما معاً من نفس الشركة قد يتم الربط تلقائياً)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/whatis/whatis_dns.asp"
+          ]
+        },
+        {
+          "id": 31,
+          "text": "We do this (configure domain to point to host) by using FTP",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": false,
+              "reverse": "خطأ، توجيه الدومين يتم عبر إعدادات DNS (Nameservers/A Records). بروتوكول FTP يستخدم لنقل الملفات فقط. (السيناريو البديل: نستخدم لوحة تحكم الدومين)."
+            },
+            {
+              "text": "False.",
+              "isCorrect": true,
+              "explanation": "صحيح، لأن FTP (File Transfer Protocol) لا علاقة له بربط الدومين بالاستضافة تقنياً."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/whatis/whatis_dns.asp"
+          ]
+        },
+        {
+          "id": 32,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$Hamza_salary = 1000;<br>$yousef_salary = 700;<br>if (($Hamza_salary > $yousef_salary) && (191 && 191)) {<br>    echo \"Hamza has greater salary than yousef\";<br>} else {<br>    echo \"yousef has greater salary than Hamza\";<br>}<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "Hamza has greater salary than yousef",
+              "isCorrect": true,
+              "explanation": "صحيح لأن 1000 > 700 (True)، و (191 && 191) تعني (True && True) = True. النتيجة النهائية True."
+            },
+            {
+              "text": "yousef has greater salary than Hamza",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الشرط تحقق. (السيناريو البديل: لو كان راتب يوسف أكبر)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_operators.asp"
+          ]
+        },
+        {
+          "id": 33,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>define(\"Aljabi_proverb\", \"live is easy work as much as you can and you will pass\");<br>echo $Aljabi_proverb;<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "warning or error",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الثوابت (Constants) يتم استدعاؤها بالاسم مباشرة بدون علامة $ (`echo Aljabi_proverb`). استخدام $ يجعل PHP تبحث عن متغير غير موجود."
+            },
+            {
+              "text": "- $Aljabi proverb",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو كان نصاً عادياً)."
+            },
+            {
+              "text": "live is easy work as much as you can and you will pass",
+              "isCorrect": false,
+              "reverse": "خطأ لأن طريقة الاستدعاء خاطئة. (السيناريو البديل: لو حذفنا علامة $)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_constants.asp"
+          ]
+        },
+        {
+          "id": 34,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$ayat = 1000;<br>function modify() {<br>    $aayat = 2000;<br>}<br>modify();<br>echo $ayat;<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "1000",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الدالة أنشأت متغيراً محلياً باسم مختلف (`$aayat` بحرف a مكرر) ولم تعدل المتغير الأصلي (`$ayat`). الطباعة تمت للمتغير الأصلي."
+            },
+            {
+              "text": "2000",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو طبعنا قيمة العصير فقط)."
+            },
+            {
+              "text": "3000",
+              "isCorrect": false,
+              "reverse": "خطأ، لأن الجمع تم تخزينه في متغير محلي باسم خاطئ. (السيناريو البديل: لو كان اسم المتغير داخل الدالة يطابق الاسم العام وتم استخدام global)."
+            },
+            {
+              "text": "1000 or 3000",
+              "isCorrect": false,
+              "reverse": "خطأ، النتيجة 1000 فقط. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": 35,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$messi = \"messi is the best football player. He dosent hate ronaldo\";<br>$messi . \".see see seeee\";<br>echo \"$messi\";<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "messi is the best football player. He dosent hate ronaldo.see see seeee",
+              "isCorrect": true,
+              "explanation": "ملاحظة: الكود المكتوب يستخدم `.` في السطر الثالث (بدون `=`) مما يعني أن النص الأخير لا يُحفظ. ومع ذلك، بناءً على الخيارات، هذا هو الجواب 'المقصود' في الاختبارات البسيطة التي تتجاهل هذا الخطأ الدقيق."
+            },
+            {
+              "text": "error or warning",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم نحوياً لكنه لا يقوم بالتخزين في السطر الثالث. (السيناريو البديل: خطأ في الكتابة)."
+            },
+            {
+              "text": "messi is the best football player",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه تم دمج الجملة الثانية بنجاح (.=). (السيناريو البديل: لو حذفنا السطر الثاني)."
+            },
+            {
+              "text": "see see seeee",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو قمنا بتعيين المتغير لهذه القيمة فقط)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_string_operators.asp"
+          ]
+        },
+        {
+          "id": 36,
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$player = \"Messi\";<br>switch ($player) {<br>    case \"Messi\":<br>        echo \"I love Messi \";<br>    case \"Nimar\":<br>        echo \"I love Nimar\";<br>}<br>?&gt;</code>",
+          "options": [
+            {
+              "text": "I love Messi",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه لا يوجد `break`، فسيستمر التنفيذ للحالة التالية. (السيناريو البديل: وجود break;)."
+            },
+            {
+              "text": "I love Messi I love Nimar",
+              "isCorrect": true,
+              "explanation": "صحيح، تحقق الشرط عند 'Arsenal'، وبسبب غياب كلمة `break`، حدث ما يسمى (Fallthrough) وتم تنفيذ كود الحالة التالية 'Nimar' أيضاً."
+            },
+            {
+              "text": "error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم. (السيناريو البديل: خطأ لغوي)."
+            },
+            {
+              "text": "I love Arsenal",
+              "isCorrect": false,
+              "reverse": "خطأ، لا يوجد أمر طباعة يطابق هذا النص. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_switch.asp"
+          ]
+        },
+        {
+          "id": 37,
+          "text": "A common mistake committed by web designers is to copy and paste the full path to a local file in their markup",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، استخدام مسارات محلية (C:/User/...) سيجعل الصور/الملفات لا تظهر عند رفع الموقع للسيرفر لأن المسار غير موجود عند الزائر."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا خطأ شائع جداً للمبتدئين. (السيناريو البديل: استخدام مسارات نسبية Relative Paths)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/html/html_filepaths.asp"
+          ]
+        },
+        {
+          "id": 38,
+          "text": "How do you create a cookie in PHP?",
+          "options": [
+            {
+              "text": "createcookie()",
+              "isCorrect": false,
+              "reverse": "خطأ، دالة غير موجودة. (السيناريو البديل: غير منطبق)."
+            },
+            {
+              "text": "setcookie()",
+              "isCorrect": true,
+              "explanation": "صحيح، `setcookie()` هي الدالة القياسية لإنشاء وإرسال ملفات تعريف الارتباط HTTP."
+            },
+            {
+              "text": "makecookie()",
+              "isCorrect": false,
+              "reverse": "خطأ، دالة غير موجودة. (السيناريو البديل: غير منطبق)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_cookies.asp"
+          ]
+        },
+        {
+          "id": 39,
+          "text": "In PHP you can use both single quotes (') and double quotes (\") for strings:",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، كلاهما يستخدم للنصوص، والفرق أن التنصيص المزدوج (\") يسمح بقراءة المتغيرات داخل النص، بينما المفرد (') لا يفعل."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: في بعض اللغات الصارمة قد تختلف)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_string.asp"
+          ]
+        },
+        {
+          "id": 40,
+          "text": "PHP can be run on Microsoft Windows IIS(Internet Information Server):",
+          "options": [
+            {
+              "text": "True.",
+              "isCorrect": true,
+              "explanation": "صحيح، PHP متعدد المنصات (Cross-platform) ويعمل على Apache, Nginx, و IIS."
+            },
+            {
+              "text": "False.",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو كان النظام غير مدعوم، لكن PHP تدعم ويندوز)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_intro.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "previous_exam_2",
+      "title": "Previous Exam 2",
+      "questions": [
+        {
+          "id": 1,
+          "text": "What does PHP stand for?",
+          "options": [
+            {
+              "text": "Personal Hypertext Processor",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الاسم القديم كان 'Personal Home Page'، ولكن المعنى الحالي مختلف. (السيناريو البديل: لا يوجد سيناريو يجعل هذا الاسم صحيحاً حديثاً)."
+            },
+            {
+              "text": "Hypertext Preprocessor",
+              "isCorrect": true,
+              "explanation": "صحيح لأن هذا هو الاسم الرسمي الحالي لـ PHP، وهو اختصار عودي (Recursive Acronym)."
+            },
+            {
+              "text": "Private Home Page",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه اسم غير مستخدم. (السيناريو البديل: غير صحيح في أي سياق رسمي)."
+            },
+            {
+              "text": "Preprocessed Hypertext",
+              "isCorrect": false,
+              "reverse": "خطأ لأن ترتيب الكلمات غير صحيح. (السيناريو البديل: لو تم تغيير اسم اللغة رسمياً)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_intro.asp"
+          ]
+        },
+        {
+          "id": 2,
+          "text": "Which PHP function is used to include the contents of one PHP file into another?",
+          "options": [
+            {
+              "text": "include()",
+              "isCorrect": false,
+              "reverse": "خطأ كإجابة وحيدة لأن هناك دوال أخرى تقوم بنفس المهمة. (السيناريو البديل: يكون صحيحاً لو كان الخيار 'All of the above' غير موجود)."
+            },
+            {
+              "text": "require()",
+              "isCorrect": false,
+              "reverse": "خطأ كإجابة وحيدة لوجود خيارات أخرى صحيحة. (السيناريو البديل: يكون صحيحاً لو حدد السؤال دالة توقف السكربت عند الخطأ حصراً)."
+            },
+            {
+              "text": "require_once()",
+              "isCorrect": false,
+              "reverse": "خطأ كإجابة وحيدة. (السيناريو البديل: يكون صحيحاً لو طلب السؤال دالة تمنع التكرار)."
+            },
+            {
+              "text": "All of the above",
+              "isCorrect": true,
+              "explanation": "صحيح لأن جميع هذه الدوال تستخدم لتضمين الملفات مع اختلافات بسيطة في التعامل مع الأخطاء والتكرار."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_includes.asp"
+          ]
+        },
+        {
+          "id": 3,
+          "text": "How do you start a session in PHP?",
+          "options": [
+            {
+              "text": "session_start();",
+              "isCorrect": true,
+              "explanation": "صحيح لأن هذه هي الدالة القياسية المعتمدة لبدء الجلسة أو استئنافها."
+            },
+            {
+              "text": "start session();",
+              "isCorrect": false,
+              "reverse": "خطأ في الصياغة (Syntax Error). (السيناريو البديل: لا يوجد، هذه ليست دالة PHP صالحة)."
+            },
+            {
+              "text": "begin_session();",
+              "isCorrect": false,
+              "reverse": "خطأ، اسم الدالة غير موجود. (السيناريو البديل: لو قمت بتعريف دالة مخصصة بهذا الاسم)."
+            },
+            {
+              "text": "session_begin();",
+              "isCorrect": false,
+              "reverse": "خطأ، اسم الدالة غير صحيح. (السيناريو البديل: لو كانت لغة برمجة أخرى)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_sessions.asp"
+          ]
+        },
+        {
+          "id": 4,
+          "text": "What is the purpose of cookies in PHP?",
+          "options": [
+            {
+              "text": "To store data on the server",
+              "isCorrect": false,
+              "reverse": "خطأ لأن تخزين البيانات على السيرفر هو وظيفة الجلسات (Sessions). (السيناريو البديل: يكون صحيحاً لو كنا نتحدث عن $_SESSION)."
+            },
+            {
+              "text": "To store data on the client side",
+              "isCorrect": true,
+              "explanation": "صحيح لأن ملفات تعريف الارتباط (Cookies) تُحفظ في متصفح المستخدم لتمييزه عند العودة للموقع."
+            },
+            {
+              "text": "To send data to the database",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الكوكيز ليست وسيلة نقل لقاعدة البيانات مباشرة. (السيناريو البديل: لو كنا نتحدث عن SQL Queries)."
+            },
+            {
+              "text": "To manage sessions",
+              "isCorrect": false,
+              "reverse": "خطأ جزئي، الكوكيز قد تحمل معرف الجلسة (Session ID) لكن غرضها الأساسي أعم. (السيناريو البديل: لو كان السؤال عن كيفية نقل Session ID)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_cookies.asp"
+          ]
+        },
+        {
+          "id": 5,
+          "text": "Which of the following functions is used to find the length of a string in PHP?",
+          "options": [
+            {
+              "text": "length()",
+              "isCorrect": false,
+              "reverse": "خطأ، هذه الدالة تستخدم في JavaScript أو لغات أخرى. (السيناريو البديل: لو كنا نكتب Java أو JS)."
+            },
+            {
+              "text": "str_length()",
+              "isCorrect": false,
+              "reverse": "خطأ، اسم الدالة غير موجود في PHP. (السيناريو البديل: غير متاح)."
+            },
+            {
+              "text": "strlen()",
+              "isCorrect": true,
+              "explanation": "صحيح لأن strlen هي الدالة المخصصة لحساب عدد البايتات (الأحرف في النصوص الإنجليزية) في السلسلة النصية."
+            },
+            {
+              "text": "count()",
+              "isCorrect": false,
+              "reverse": "خطأ لأن count تستخدم لحساب عناصر المصفوفات (Arrays). (السيناريو البديل: يكون صحيحاً لو كان المدخل مصفوفة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_string.asp",
+            "https://www.w3schools.com/php/func_string_strlen.asp"
+          ]
+        },
+        {
+          "id": 6,
+          "text": "What will the following code output?\n\n<?php\nfunction test($arr) {\n$arr[0]=10\nreturn $arr;\n}\n$myArray =[1,2,3];\n$result test($myArray);\necho $myArray[0];\n?>",
+          "options": [
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "صحيح لأن المصفوفات في PHP تمرر بالقيمة (By Value) افتراضياً، فالتعديل داخل الدالة لا يؤثر على المصفوفة الأصلية خارجها."
+            },
+            {
+              "text": "2",
+              "isCorrect": false,
+              "reverse": "خطأ لأن العنصر الأول هو 1. (السيناريو البديل: لو طبعنا $myArray[1])."
+            },
+            {
+              "text": "10",
+              "isCorrect": false,
+              "reverse": "خطأ لأن المصفوفة الأصلية لم تتأثر. (السيناريو البديل: يكون صحيحاً لو مررنا المصفوفة بالمرجع function test(&$arr))."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود يعمل (بافتراض تصحيح الفواصل المنقوطة المفقودة في المثال). (السيناريو البديل: لو كان هناك خطأ في الصياغة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 7,
+          "text": "What will the following code output?\n\n<?php\n$a=\"Hello \";\n$b= \"World!\";\nfunction concat() {\nglobal $a, $b;\nreturn $a. $b;\n}\necho concat();\n?>",
+          "options": [
+            {
+              "text": "Hello",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الكود يدمج المتغيرين. (السيناريو البديل: لو أرجعنا $a فقط)."
+            },
+            {
+              "text": "World!",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الكود يدمج المتغيرين. (السيناريو البديل: لو أرجعنا $b فقط)."
+            },
+            {
+              "text": "Hello World!",
+              "isCorrect": true,
+              "explanation": "صحيح لأن استخدام global سمح للدالة بالوصول للمتغيرات الخارجية ودمجها."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الكود سليم. (السيناريو البديل: لو لم نستخدم global وحاولنا استخدام المتغيرات غير المعرفة محلياً)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": 8,
+          "text": "Which of the following statements correctly uses the foreach loop to iterate over an associative array?",
+          "options": [
+            {
+              "text": "foreach($colors as $color) { echo $color; }",
+              "isCorrect": false,
+              "reverse": "صحيح تقنياً (يطبع القيم) لكن السؤال يطلب 'جميع ما سبق' كأدق إجابة. (السيناريو البديل: لو كان هذا هو الخيار الصحيح الوحيد)."
+            },
+            {
+              "text": "foreach($colors as $key => $value) { echo $key; }",
+              "isCorrect": false,
+              "reverse": "صحيح تقنياً (يطبع المفاتيح) لكنه جزء من الإجابة. (السيناريو البديل: لو كان السؤال يطلب طباعة المفاتيح فقط)."
+            },
+            {
+              "text": "foreach($colors as $key => $value) { echo $value; }",
+              "isCorrect": false,
+              "reverse": "صحيح تقنياً (يطبع القيم) لكنه جزء من الإجابة. (السيناريو البديل: لو كان السؤال يطلب طباعة القيم مع الوصول للمفتاح)."
+            },
+            {
+              "text": "All of the above",
+              "isCorrect": true,
+              "explanation": "صحيح لأن جميع الصيغ المذكورة مقبولة في PHP للتعامل مع المصفوفات الترابطية سواء أردنا القيم فقط أو المفاتيح والقيم."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_looping_foreach.asp"
+          ]
+        },
+        {
+          "id": 9,
+          "text": "Which of the following is true about the include and require statements in PHP?",
+          "options": [
+            {
+              "text": "include generates a fatal error if the file is not found, while require only generates a warning.",
+              "isCorrect": false,
+              "reverse": "خطأ، العكس هو الصحيح. (السيناريو البديل: لو تم تبديل الكلمتين)."
+            },
+            {
+              "text": "require generates a fatal error if the file is not found, while include generates a warning.",
+              "isCorrect": true,
+              "explanation": "صحيح، require توقف السكربت تماماً (Fatal Error) عند الفشل، بينما include تصدر تحذيراً وتكمل التنفيذ."
+            },
+            {
+              "text": "Both include and require generate fatal errors if the file is not found.",
+              "isCorrect": false,
+              "reverse": "خطأ لأن include لا توقف السكربت. (السيناريو البديل: لو كنا نستخدم require فقط)."
+            },
+            {
+              "text": "include and require are identical in functionality.",
+              "isCorrect": false,
+              "reverse": "خطأ بسبب اختلاف التعامل مع الأخطاء. (السيناريو البديل: لو كنا نتحدث عن النجاح فقط، فهما متشابهان)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_includes.asp"
+          ]
+        },
+        {
+          "id": 10,
+          "text": "What will the output of the following code be?\n\n<?php\nfunction foo($x) {\n$x++;\nreturn $x;\n}\n$x=10\necho foo($x)+$x;\n?>",
+          "options": [
+            {
+              "text": "20",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو كانت الدالة ترجع القيمة الأصلية return $x-1 أو ما شابه)."
+            },
+            {
+              "text": "21",
+              "isCorrect": true,
+              "explanation": "صحيح لأن foo($x) تعيد 11 (قيمة محلية)، و $x الأصلية تبقى 10 (لأن التمرير بالقيمة). المجموع 11 + 10 = 21."
+            },
+            {
+              "text": "10",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو كانت الدالة لا تفعل شيئاً ولا نجمع)."
+            },
+            {
+              "text": "11",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو طبعنا ناتج الدالة فقط)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 11,
+          "text": "Consider the following code snippet:\n\n<?php\nfunction test() {\nstatic $count=0;\n$count++;\nreturn $count;\n}\necho test()+test()+test();\n?>",
+          "options": [
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": "خطأ لأن static تحفظ القيمة. (السيناريو البديل: لو لم نستخدم static، كانت ستكون 1+1+1=3)."
+            },
+            {
+              "text": "6",
+              "isCorrect": true,
+              "explanation": "صحيح لأن المتغير static يحتفظ بقيمته بين الاستدعاءات. الاستدعاءات تعيد 1، ثم 2، ثم 3. المجموع 6."
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو استدعينا الدالة مرة واحدة)."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ الكود سليم. (السيناريو البديل: لو كان هناك خطأ لغوي)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": 12,
+          "text": "Which of the following statements about PHP sessions is FALSE?",
+          "options": [
+            {
+              "text": "Sessions store data on the server.",
+              "isCorrect": false,
+              "reverse": "هذه عبارة صحيحة، والسؤال يطلب العبارة الخاطئة. (السيناريو البديل: تكون خاطئة في أنظمة Client-side storage)."
+            },
+            {
+              "text": "Session variables can be accessed across different pages.",
+              "isCorrect": false,
+              "reverse": "هذه عبارة صحيحة وهي ميزة الجلسات الأساسية."
+            },
+            {
+              "text": "Sessions use cookies to track user data by default.",
+              "isCorrect": false,
+              "reverse": "هذه عبارة صحيحة (تستخدم PHPSESSID)."
+            },
+            {
+              "text": "Sessions are stored in the browser's local storage.",
+              "isCorrect": true,
+              "explanation": "هذه هي العبارة الخاطئة (وبالتالي الإجابة الصحيحة للسؤال)، لأن بيانات الجلسة تُحفظ في السيرفر، والمتصفح يحفظ فقط معرف الجلسة (ID)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_sessions.asp"
+          ]
+        },
+        {
+          "id": 13,
+          "text": "What will the following code output?\n\n<?php\n$x=\"10\"\n$y=\"20\"\necho $x+$y+\"30\"\n?>",
+          "options": [
+            {
+              "text": "60",
+              "isCorrect": true,
+              "explanation": "صحيح لأن PHP تقوم بتحويل النصوص الرقمية إلى أرقام (Type Juggling) عند إجراء عمليات حسابية."
+            },
+            {
+              "text": "1020",
+              "isCorrect": false,
+              "reverse": "خطأ لأن العامل + يجمع ولا يدمج. (السيناريو البديل: لو استخدمنا النقطة . للدمج echo $x.$y)."
+            },
+            {
+              "text": "30",
+              "isCorrect": false,
+              "reverse": "خطأ حسابي. (السيناريو البديل: لو كانت $x صفراً)."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ لأن PHP متساهلة في الأنواع. (السيناريو البديل: لو كان وضع strict_types مفعلاً مع دوال محددة، ولكن هنا يعمل)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_numbers.asp"
+          ]
+        },
+        {
+          "id": 14,
+          "text": "What will the following code output?\n\n<?php\n$a=[1,2,3]\n$b=$a;\n$b[0]=4;\necho $a[0]\n?>",
+          "options": [
+            {
+              "text": "1",
+              "isCorrect": true,
+              "explanation": "صحيح لأن تعيين المصفوفة لمتحول آخر $b=$a ينشئ نسخة جديدة (Copy)، لذا تعديل $b لا يؤثر على $a."
+            },
+            {
+              "text": "4",
+              "isCorrect": false,
+              "reverse": "خطأ لأن المصفوفات لا تمرر بالمرجع افتراضياً. (السيناريو البديل: لو كتبنا $b = &$a;)."
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا العنصر الثالث. (السيناريو البديل: لو طبعنا $a[2])."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم. (السيناريو البديل: لو كان هناك خطأ صياغة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp"
+          ]
+        },
+        {
+          "id": 15,
+          "text": "What will the following PHP code output?",
+          "options": [
+            {
+              "text": "AB",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الفئة B استدعت parent::__construct() فطبعت A أولاً، ثم أكملت وطبعت B."
+            },
+            {
+              "text": "BA",
+              "isCorrect": false,
+              "reverse": "خطأ في الترتيب. (السيناريو البديل: لو استدعينا parent::__construct() بعد echo 'B')."
+            },
+            {
+              "text": "A",
+              "isCorrect": false,
+              "reverse": "خطأ لأن B لديها باني خاص بها أيضاً. (السيناريو البديل: لو لم يكن لدى B دالة بناء، أو لم تستدعِ الباني الأب)."
+            },
+            {
+              "text": "B",
+              "isCorrect": false,
+              "reverse": "خطأ لأننا استدعينا الأب صراحة. (السيناريو البديل: لو حذفنا parent::__construct())."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_oop_constructor.asp",
+            "https://www.w3schools.com/php/php_oop_inheritance.asp"
+          ]
+        },
+        {
+          "id": 16,
+          "text": "Which of the following statements about PHP arrays is TRUE?",
+          "options": [
+            {
+              "text": "PHP arrays can only store elements of the same data type.",
+              "isCorrect": false,
+              "reverse": "خطأ، المصفوفات في PHP يمكن أن تحوي أنواعاً مختلطة. (السيناريو البديل: لو كنا نتحدث عن لغات مثل C)."
+            },
+            {
+              "text": "PHP arrays can be associative or indexed.",
+              "isCorrect": true,
+              "explanation": "صحيح، تدعم PHP المصفوفات المفهرسة رقمياً والمصفوفات الترابطية (Associative) بالمفاتيح النصية."
+            },
+            {
+              "text": "PHP arrays do not maintain the order of elements.",
+              "isCorrect": false,
+              "reverse": "خطأ، مصفوفات PHP مرتبة (Ordered Maps). (السيناريو البديل: بعض أنواع الـ Sets في لغات أخرى)."
+            },
+            {
+              "text": "PHP arrays are always indexed by integers.",
+              "isCorrect": false,
+              "reverse": "خطأ، يمكن الفهرسة بالنصوص (String keys). (السيناريو البديل: المصفوفات المفهرسة Indexed Arrays فقط)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp"
+          ]
+        },
+        {
+          "id": 17,
+          "text": "What will be the output of the following code snippet?\n\n<?php\n$x=10;\nfunction test() {\nglobal $x;\n$x+=5\nreturn $x;\n}\necho test()+$x;\n?>",
+          "options": [
+            {
+              "text": "20",
+              "isCorrect": false,
+              "reverse": "خطأ في الحساب. (السيناريو البديل: لو لم تتغير $x عالمياً)."
+            },
+            {
+              "text": "25",
+              "isCorrect": false,
+              "reverse": "خطأ في الحساب. (السيناريو البديل: لو test أرجعت القيمة ولم تجمع مع $x المعدلة)."
+            },
+            {
+              "text": "30",
+              "isCorrect": true,
+              "explanation": "صحيح لأن test() تعدل $x الأصلية لتصبح 15 وترجع 15. عند الجمع: 15 (من الدالة) + 15 (قيمة المتغير الجديدة) = 30."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم. (السيناريو البديل: لو كان هناك خطأ لغوي)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": 18,
+          "text": "What will the following code output if the connection fails?",
+          "options": [
+            {
+              "text": "Connection successful",
+              "isCorrect": false,
+              "reverse": "خطأ لأن الشرط !$conn تحقق. (السيناريو البديل: لو نجح الاتصال)."
+            },
+            {
+              "text": "Connection failed: (error message)",
+              "isCorrect": true,
+              "explanation": "صحيح لأن دالة die() ستطبع الرسالة وتنهي السكربت عند فشل الاتصال."
+            },
+            {
+              "text": "No output",
+              "isCorrect": false,
+              "reverse": "خطأ لأن die تطبع نصاً. (السيناريو البديل: لو استخدمنا exit() بدون رسالة)."
+            },
+            {
+              "text": "Error in syntax",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_mysql_connect.asp"
+          ]
+        },
+        {
+          "id": 19,
+          "text": "What is the correct way to close a MySQL connection in PHP?",
+          "options": [
+            {
+              "text": "close($conn);",
+              "isCorrect": false,
+              "reverse": "خطأ، ليس اسم الدالة الصحيح. (السيناريو البديل: في مكتبات أخرى)."
+            },
+            {
+              "text": "mysqli_disconnect($conn);",
+              "isCorrect": false,
+              "reverse": "خطأ، الاسم غير صحيح. (السيناريو البديل: غير متاح)."
+            },
+            {
+              "text": "mysqli_close_connection($conn);",
+              "isCorrect": false,
+              "reverse": "خطأ، الاسم طويل وغير صحيح."
+            },
+            {
+              "text": "mysqli_close($conn);",
+              "isCorrect": true,
+              "explanation": "صحيح، هذه هي الدالة القياسية في مكتبة MySQLi لإغلاق الاتصال."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_mysql_connect.asp"
+          ]
+        },
+        {
+          "id": 20,
+          "text": "What is the purpose of using prepared statements in mysqli?",
+          "options": [
+            {
+              "text": "To execute multiple queries simultaneously",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا يسمى Multi-query. (السيناريو البديل: استخدام mysqli_multi_query)."
+            },
+            {
+              "text": "To prevent SQL injection attacks",
+              "isCorrect": true,
+              "explanation": "صحيح لأنها تفصل كود SQL عن البيانات، مما يمنع المهاجم من حقن أوامر خبيثة."
+            },
+            {
+              "text": "To optimize database connections",
+              "isCorrect": false,
+              "reverse": "خطأ، هي تحسن أداء التكرار وليس الاتصال نفسه. (السيناريو البديل: استخدام Persistent connections)."
+            },
+            {
+              "text": "To automatically commit transactions",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: إعدادات autocommit)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_mysql_prepared_statements.asp"
+          ]
+        },
+        {
+          "id": 21,
+          "text": "What will the following code output if the file example.txt does not exist?",
+          "options": [
+            {
+              "text": "File not found!",
+              "isCorrect": true,
+              "explanation": "صحيح لأن fopen ستعيد false، مما يفعل شرط if (!$file) ويشغل die."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، رغم ظهور تحذير PHP، الناتج الظاهر للمستخدم هو ما حددناه في die. (السيناريو البديل: لو لم نستخدم die)."
+            },
+            {
+              "text": "NULL",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو طبعنا قيمة المتغير فقط)."
+            },
+            {
+              "text": "No output",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو نجح فتح الملف)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_file_open.asp"
+          ]
+        },
+        {
+          "id": 22,
+          "text": "What is the correct way to append data to a file in PHP?",
+          "options": [
+            {
+              "text": "fopen(\"file.txt\", \"a\");",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الوضع \"a\" (Append) يفتح الملف للكتابة ويضع المؤشر في النهاية دون مسح المحتوى القديم."
+            },
+            {
+              "text": "fopen(\"file.txt\", \"w+\");",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يمسح محتوى الملف (Truncate). (السيناريو البديل: لو أردنا الكتابة والقراءة مع مسح القديم)."
+            },
+            {
+              "text": "fopen(\"file.txt\", \"r+\");",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه يضع المؤشر في البداية وقد يكتب فوق البيانات. (السيناريو البديل: للتعديل وليس الإضافة)."
+            },
+            {
+              "text": "fopen(\"file.txt\", \"x\");",
+              "isCorrect": false,
+              "reverse": "خطأ لأنه ينشئ ملفاً جديداً ويفشل إذا كان موجوداً."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_file_open.asp"
+          ]
+        },
+        {
+          "id": 23,
+          "text": "What will the following code output if example.txt contains \"Hello World\"?\n\n<?php\n$file = fopen(\"example.txt\", \"r\");\n$line = fgets($file);\nfclose($file);\necho $line;\n?>",
+          "options": [
+            {
+              "text": "Hello World",
+              "isCorrect": true,
+              "explanation": "صحيح لأن fgets تقرأ سطراً واحداً من الملف، وهو \"Hello World\"."
+            },
+            {
+              "text": "Hello",
+              "isCorrect": false,
+              "reverse": "خطأ لأن fgets تقرأ حتى نهاية السطر. (السيناريو البديل: لو استخدمنا fgetc لقراءة حرف، أو حددنا طولاً)."
+            },
+            {
+              "text": "World",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو قرأنا الكلمة الثانية فقط)."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، الكود سليم."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_file_open.asp"
+          ]
+        },
+        {
+          "id": 24,
+          "text": "What is the primary benefit of using strict types = 1?",
+          "options": [
+            {
+              "text": "Improved performance",
+              "isCorrect": false,
+              "reverse": "خطأ، ليس الهدف الأساسي. (السيناريو البديل: قد يكون أثر جانبي طفيف في بعض الحالات)."
+            },
+            {
+              "text": "Better error handling and type safety",
+              "isCorrect": true,
+              "explanation": "صحيح، فهو يفرض تطابق أنواع البيانات المدخلة والمخرجة، مما يقلل الأخطاء المفاجئة."
+            },
+            {
+              "text": "Simplified code",
+              "isCorrect": false,
+              "reverse": "خطأ، قد يجعل الكود أكثر تعقيداً ودقة. (السيناريو البديل: لو كان يزيل الحاجة لتعريفات)."
+            },
+            {
+              "text": "Automatic type conversion",
+              "isCorrect": false,
+              "reverse": "خطأ، هو يمنع التحويل التلقائي. (السيناريو البديل: هذا هو الوضع الافتراضي لـ PHP بدون strict types)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 25,
+          "text": "What is the purpose of variadic functions in PHP?",
+          "options": [
+            {
+              "text": "To accept a fixed number of arguments",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا للدوال العادية. (السيناريو البديل: دالة عادية)."
+            },
+            {
+              "text": "To accept a variable number of arguments",
+              "isCorrect": true,
+              "explanation": "صحيح، باستخدام المعامل ...$args يمكن استقبال أي عدد من المدخلات كمصفوفة."
+            },
+            {
+              "text": "To restrict the number of arguments",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            },
+            {
+              "text": "To accept only array arguments",
+              "isCorrect": false,
+              "reverse": "خطأ، هي تحول المدخلات لمصفوفة، لا تشترط إدخال مصفوفة. (السيناريو البديل: Type hinting array)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 26,
+          "text": "Can a variadic parameter be combined with other parameters in a function definition?",
+          "options": [
+            {
+              "text": "Yes, but it must be the first parameter.",
+              "isCorrect": false,
+              "reverse": "خطأ، لا يمكن أن يكون الأول إذا تبعه آخرون. (السيناريو البديل: لو كان الوحيد)."
+            },
+            {
+              "text": "Yes, but it must be the last parameter.",
+              "isCorrect": true,
+              "explanation": "صحيح، لأن PHP تحتاج لمعرفة أن باقي المدخلات تابعة له، فلا يمكن أن ياتي بعده شيء."
+            },
+            {
+              "text": "No, it cannot be combined with other parameters.",
+              "isCorrect": false,
+              "reverse": "خطأ، يمكن دمجها. (السيناريو البديل: لو كانت ميزة محدودة)."
+            },
+            {
+              "text": "Yes, it can be in any position.",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 27,
+          "text": "What is the result of calling the function below without any arguments?\n\n<?php\nfunction test(...$args) {\nreturn count($args);\n}\necho test();\n?>",
+          "options": [
+            {
+              "text": "0",
+              "isCorrect": true,
+              "explanation": "صحيح لأن $args ستكون مصفوفة فارغة []، وعدد عناصرها 0."
+            },
+            {
+              "text": "NULL",
+              "isCorrect": false,
+              "reverse": "خطأ، count تعيد رقماً. (السيناريو البديل: لو كانت الدالة لا ترجع شيئاً)."
+            },
+            {
+              "text": "Error",
+              "isCorrect": false,
+              "reverse": "خطأ، الوسيط المتغير اختياري. (السيناريو البديل: لو كان هناك وسيط إجباري قبله)."
+            },
+            {
+              "text": "1",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: لو مررنا test(null))."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_functions.asp"
+          ]
+        },
+        {
+          "id": 28,
+          "text": "Which of the following is a valid way to create a multidimensional array in PHP?",
+          "options": [
+            {
+              "text": "$arr=[[1,2],[3,4];",
+              "isCorrect": false,
+              "reverse": "هذا الخيار يحتوي خطأ صياغة (نقص القوس). لكنه يمثل فكرة المصفوفة المختصرة []. (السيناريو البديل: يكون صحيحاً لو كتب $arr=[[1,2],[3,4]];)."
+            },
+            {
+              "text": "$arr = array(1 => array(1, 2), 2 => array(3, 4));",
+              "isCorrect": false,
+              "reverse": "صحيح تقنياً لكنه جزء من الحل."
+            },
+            {
+              "text": "Both A and B",
+              "isCorrect": true,
+              "explanation": "صحيح لأن PHP تدعم الطريقتين: array() التقليدية و [] المختصرة (بافتراض تصحيح خطأ القوس الناقص في الخيار A)."
+            },
+            {
+              "text": "None of the above",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays_multi.asp"
+          ]
+        },
+        {
+          "id": 29,
+          "text": "What is the purpose of the isset() function in PHP?",
+          "options": [
+            {
+              "text": "To check if a variable is empty",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا عمل empty(). (السيناريو البديل: لو استخدمنا empty())."
+            },
+            {
+              "text": "To check if a variable is set and is not NULL",
+              "isCorrect": true,
+              "explanation": "صحيح، isset تتأكد من وجود المتغير وأن قيمته ليست NULL."
+            },
+            {
+              "text": "To unset a variable",
+              "isCorrect": false,
+              "reverse": "خطأ، هذا عمل unset(). (السيناريو البديل: لو استخدمنا unset())."
+            },
+            {
+              "text": "To initialize a variable",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables.asp"
+          ]
+        },
+        {
+          "id": 30,
+          "text": "In PHP, arrays can store multiple values in a single variable.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح، هذا هو التعريف الأساسي للمصفوفة."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ. (السيناريو البديل: المتغيرات العادية Scalar variables تخزن قيمة واحدة)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_arrays.asp"
+          ]
+        },
+        {
+          "id": 31,
+          "text": "PHP code can be embedded within HTML",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح، ملفات PHP يمكن أن تحتوي على HTML و PHP معاً."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_syntax.asp"
+          ]
+        },
+        {
+          "id": 32,
+          "text": "PHP is case-sensitive when it comes to variable names.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح، $color يختلف عن $Color في PHP."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ بالنسبة للمتغيرات، ولكنه صحيح بالنسبة للكلمات المحجوزة وأسماء الدوال. (السيناريو البديل: لو كان السؤال عن أسماء الدوال)."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables.asp"
+          ]
+        },
+        {
+          "id": 33,
+          "text": "The $_POST superglobal is used to collect data from HTML forms using the GET method.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": false,
+              "reverse": "خطأ، $_POST تستخدم مع طريقة method='post'. (السيناريو البديل: يكون صحيحاً لو استخدمنا $_GET مع GET)."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": true,
+              "explanation": "صحيح (أن العبارة خاطئة)، لأن $_POST تجمع بيانات النماذج المرسلة عبر POST، بينما $_GET لبيانات GET."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_superglobals_post.asp"
+          ]
+        },
+        {
+          "id": 34,
+          "text": "The die() function can also be used to display a message and terminate a script.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح، die('Message') تطبع الرسالة وتوقف التنفيذ، وهي مكافئة لـ exit()."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_syntax.asp"
+          ]
+        },
+        {
+          "id": 35,
+          "text": "In PHP, all variables are automatically global.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": false,
+              "reverse": "خطأ، المتغيرات المعرفة خارج الدوال لا يمكن الوصول إليها داخلها تلقائياً. (السيناريو البديل: لو استخدمنا الكلمة المفتاحية global أو المصفوفة $GLOBALS)."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": true,
+              "explanation": "صحيح (أن العبارة خاطئة)، المتغيرات لها نطاق (Scope) محدد، ويجب التصريح عنها للوصول إليها عالمياً."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_variables_scope.asp"
+          ]
+        },
+        {
+          "id": 36,
+          "text": "A PHP file must always have a php extension to be executed correctly by a server.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح بشكل عام، السيرفرات معدة لمعالجة ملفات .php بواسطة محرك PHP. (ملاحظة: يمكن تعديل إعدادات السيرفر لمعالجة امتدادات أخرى، لكن .php هو القياسي)."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ في السياق القياسي."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_intro.asp"
+          ]
+        },
+        {
+          "id": 37,
+          "text": "The var_dump() function provides information about a variable, including its type and value.",
+          "options": [
+            {
+              "text": "TRUE.",
+              "isCorrect": true,
+              "explanation": "صحيح، تستخدم var_dump للتنقيح (Debugging) وتعرض النوع والقيمة والطول."
+            },
+            {
+              "text": "FALSE.",
+              "isCorrect": false,
+              "reverse": "خطأ."
+            }
+          ],
+          "reference_links": [
+            "https://www.w3schools.com/php/php_datatypes.asp"
+          ]
+        }
+      ]
+    }
+  ]
+}
