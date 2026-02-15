@@ -313,4 +313,43 @@
       .home-btn {
         margin-bottom: 1rem;
       }
-    
+
+      /* Responsive Adjustments */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 1.5rem;
+        }
+
+        .question-text {
+          font-size: 1.1rem;
+        }
+
+        .option-btn {
+          padding: 0.75rem;
+          font-size: 0.95rem;
+        }
+
+        .nav-grid {
+          grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+          gap: 0.25rem;
+        }
+
+        .nav-item {
+          height: 35px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Ensure images don't overflow */
+      img {
+        max-width: 100%;
+        height: auto;
+      }

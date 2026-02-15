@@ -1058,31 +1058,31 @@
         },
         {
           "id": 26,
-          "text": "What is the output of the program? if($x>$y && 1/1) ... ($x=10, $y=20)",
+          "text": "What is the output of the program?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$x = 10;<br>$y = 20;<br>if ($x > $y && 1||1)<br>    print \"1000 PHP MCQ\";<br>else<br>    print \"Welcome to Sanfoundry\";<br>?&gt;</code>",
           "options": [
             {
-              "text": "no output",
-              "isCorrect": false,
-              "reverse": "خطأ لأنه يوجد جملة طباعة في كلا الحالتين. (السيناريو البديل: لو كانت الدالة فارغة)."
+              "text": "1000 PHP MCQ",
+              "isCorrect": true,
+              "explanation": "صحيح لأن الشرط <code>$x > $y && 1||1</code> يتم تقييمه كالتالي:<br>1. <code>$x > $y</code> (10 > 20) تعطي <code>false</code>.<br>2. <code>false && 1</code> تعطي <code>false</code> (لأن && لها أسبقية أعلى من ||).<br>3. <code>false || 1</code> تعطي <code>true</code>.<br>بما أن الناتج النهائي True، يتم طباعة الجملة الأولى."
             },
             {
               "text": "Welcome to Sanfoundry",
-              "isCorrect": true,
-              "explanation": "صحيح لأن الشرط `$x > $y` (أي 10 > 20) هو False. وبما أن الرابط هو &&، فإن الشرط الكلي يصبح False، فينتقل التنفيذ لـ else."
-            },
-            {
-              "text": "1000 PHP MCQ",
               "isCorrect": false,
-              "reverse": "خطأ لأن الشرط الأول لم يتحقق. (السيناريو البديل: لو كانت $x=30)."
+              "reverse": "خطأ لأن الشرط النهائي هو True."
             },
             {
               "text": "error",
               "isCorrect": false,
-              "reverse": "خطأ، الكود سليم نحوياً. (السيناريو البديل: وجود خطأ في الكتابة)."
+              "reverse": "خطأ، الكود سليم."
+            },
+            {
+              "text": "no output",
+              "isCorrect": false,
+              "reverse": "خطأ."
             }
           ],
           "reference_links": [
-            "https://www.w3schools.com/php/php_if_else.asp"
+            "https://www.w3schools.com/php/php_operators.asp"
           ]
         },
         {

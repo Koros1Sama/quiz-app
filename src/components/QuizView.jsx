@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import QuestionCard from './QuestionCard';
 import ExplanationPanel from './ExplanationPanel';
 import NavigationGrid from './NavigationGrid';
@@ -7,13 +7,50 @@ const QuizView = ({ category, onBack }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({}); // { questionIndex: { selectedIndex, isCorrect } }
   
-  // Reset state when category changes (though we mount new component typically)
-  // But if we want to persist state if user goes back? 
-  // For now, simple implementation like the HTML version: local state resets on mount.
+  // Safe access to questions
+  const questions = useMemo(() => category ? category.questions : [], [category]);
+  const questionsLength = questions.length;
 
-  const questions = category.questions;
+  const handleAnswer = useCallback((selectedIndex) => {
+    setUserAnswers(prev => {
+        if (prev[currentQuestionIndex]) return prev; // Already answered
 
-  if (!questions || questions.length === 0) {
+        // Guard against accessing undefined if questions are missing (though UI won't allow it)
+        if (!questions[currentQuestionIndex]) return prev;
+
+        const isCorrect = questions[currentQuestionIndex].options[selectedIndex].isCorrect;
+        return {
+            ...prev,
+            [currentQuestionIndex]: { selectedIndex, isCorrect }
+        };
+    });
+  }, [currentQuestionIndex, questions]);
+
+  const navigateTo = useCallback((index) => {
+    setCurrentQuestionIndex(index);
+  }, []);
+
+  const nextQuestion = useCallback(() => {
+    setCurrentQuestionIndex(prev => {
+        if (prev < questionsLength - 1) return prev + 1;
+        return prev;
+    });
+  }, [questionsLength]);
+
+  const prevQuestion = useCallback(() => {
+    setCurrentQuestionIndex(prev => {
+        if (prev > 0) return prev - 1;
+        return prev;
+    });
+  }, []);
+
+  // --- Early Returns for Rendering ---
+
+  if (!category) {
+    return <div style={{ padding: '2rem', textAlign: 'center' }}>حدث خطأ: القسم غير موجود.</div>;
+  }
+
+  if (questionsLength === 0) {
     return (
       <div className="quiz-view" style={{ textAlign: 'center', padding: '2rem' }}>
         <p>عذراً، لا توجد أسئلة متاحة في هذا القسم حالياً.</p>
@@ -29,34 +66,8 @@ const QuizView = ({ category, onBack }) => {
 
   if (!currentQuestion) return <div>تحميل السؤال...</div>;
 
-  const handleAnswer = (selectedIndex) => {
-    if (userAnswer) return; // Prevent re-answering
-
-    const isCorrect = currentQuestion.options[selectedIndex].isCorrect;
-    setUserAnswers(prev => ({
-      ...prev,
-      [currentQuestionIndex]: { selectedIndex, isCorrect }
-    }));
-  };
-
-  const navigateTo = (index) => {
-    setCurrentQuestionIndex(index);
-  };
-
-  const nextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-    }
-  };
-
-  const prevQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
-    }
-  };
-
   // Progress calculation
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const progress = ((currentQuestionIndex + 1) / questionsLength) * 100;
 
   return (
     <div className="quiz-view" id="quizView" style={{ display: 'block' }}>
@@ -70,7 +81,7 @@ const QuizView = ({ category, onBack }) => {
 
       <div style={{ textAlign: 'left', marginBottom: '10px', fontSize: '0.9em', color: 'gray' }}>
         <span id="currentQuestionNum">{currentQuestionIndex + 1}</span> /
-        <span id="totalQuestions">{questions.length}</span>
+        <span id="totalQuestions">{questionsLength}</span>
       </div>
 
       <div id="quizContent">
@@ -98,13 +109,9 @@ const QuizView = ({ category, onBack }) => {
         <button 
           className="btn" 
           onClick={nextQuestion} 
-          disabled={!userAnswer && currentQuestionIndex < questions.length} // Original logic: next disabled until answered? 
-          // Re-reading HTML logic: 
-          // if (question.answered) { if not last, enable next } else { disable next }
-          // So yes, Next is disabled until answered.
-          // Wait, if it is the last question, it says "Finished".
+          disabled={!userAnswer && currentQuestionIndex < questionsLength - 1} 
         >
-           {currentQuestionIndex < questions.length - 1 ? 'التالي' : 'انتهى القسم'}
+           {currentQuestionIndex < questionsLength - 1 ? 'التالي' : 'انتهى القسم'}
         </button>
       </div>
 

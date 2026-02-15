@@ -24,4 +24,4 @@ const NavigationGrid = ({ questions, currentQuestionIndex, userAnswers, onNaviga
   );
 };
 
-export default NavigationGrid;
+export default React.memo(NavigationGrid);

@@ -39,4 +39,4 @@ const QuestionCard = ({ question, currentQuestionIndex, userAnswer, onAnswer }) 
   );
 };
 
-export default QuestionCard;
+export default React.memo(QuestionCard);
