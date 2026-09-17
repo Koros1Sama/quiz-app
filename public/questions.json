@@ -1556,7 +1556,7 @@
         },
         {
           "id": 6,
-          "text": "What will the following code output?\n\n<?php\nfunction test($arr) {\n$arr[0]=10\nreturn $arr;\n}\n$myArray =[1,2,3];\n$result test($myArray);\necho $myArray[0];\n?>",
+          "text": "What will the following code output?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>function test($arr) {<br>$arr[0] = 10;<br>return $arr;<br>}<br>$myArray = [1, 2, 3];<br>$result = test($myArray);<br>echo $myArray[0];<br>?&gt;</code>",
           "options": [
             {
               "text": "1",
@@ -1585,7 +1585,7 @@
         },
         {
           "id": 7,
-          "text": "What will the following code output?\n\n<?php\n$a=\"Hello \";\n$b= \"World!\";\nfunction concat() {\nglobal $a, $b;\nreturn $a. $b;\n}\necho concat();\n?>",
+          "text": "What will the following code output?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$a = \"Hello \";<br>$b = \"World!\";<br>function concat() {<br>global $a, $b;<br>return $a . $b;<br>}<br>echo concat();<br>?&gt;</code>",
           "options": [
             {
               "text": "Hello",
@@ -1614,7 +1614,7 @@
         },
         {
           "id": 8,
-          "text": "Which of the following statements correctly uses the foreach loop to iterate over an associative array?",
+          "text": "Which of the following statements correctly uses the foreach loop to iterate over an associative array?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$colors = array(\"red\" => \"apple\", \"yellow\" => \"banana\", \"green\" => \"grape\");<br>?&gt;</code>",
           "options": [
             {
               "text": "foreach($colors as $color) { echo $color; }",
@@ -1672,7 +1672,7 @@
         },
         {
           "id": 10,
-          "text": "What will the output of the following code be?\n\n<?php\nfunction foo($x) {\n$x++;\nreturn $x;\n}\n$x=10\necho foo($x)+$x;\n?>",
+          "text": "What will the output of the following code be?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>function foo($x) {<br>$x++;<br>return $x;<br>}<br>$x = 10;<br>echo foo($x) + $x;<br>?&gt;</code>",
           "options": [
             {
               "text": "20",
@@ -1701,7 +1701,7 @@
         },
         {
           "id": 11,
-          "text": "Consider the following code snippet:\n\n<?php\nfunction test() {\nstatic $count=0;\n$count++;\nreturn $count;\n}\necho test()+test()+test();\n?>",
+          "text": "Consider the following code snippet:<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>function test() {<br>static $count = 0;<br>$count++;<br>return $count;<br>}<br>echo test() + test() + test();<br>?&gt;</code>",
           "options": [
             {
               "text": "3",
@@ -1759,7 +1759,7 @@
         },
         {
           "id": 13,
-          "text": "What will the following code output?\n\n<?php\n$x=\"10\"\n$y=\"20\"\necho $x+$y+\"30\"\n?>",
+          "text": "What will the following code output?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$x = \"10\";<br>$y = \"20\";<br>echo $x + $y + \"30\";<br>?&gt;</code>",
           "options": [
             {
               "text": "60",
@@ -1788,7 +1788,7 @@
         },
         {
           "id": 14,
-          "text": "What will the following code output?\n\n<?php\n$a=[1,2,3]\n$b=$a;\n$b[0]=4;\necho $a[0]\n?>",
+          "text": "What will the following code output?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$a = [1, 2, 3];<br>$b = $a;<br>$b[0] = 4;<br>echo $a[0];<br>?&gt;</code>",
           "options": [
             {
               "text": "1",
@@ -1817,7 +1817,7 @@
         },
         {
           "id": 15,
-          "text": "What will the following PHP code output?",
+          "text": "What will the following PHP code output?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>class A {<br>public function __construct() {<br>echo \"A\";<br>}<br>}<br>class B extends A {<br>public function __construct() {<br>parent::__construct();<br>echo \"B\";<br>}<br>}<br>new B();<br>?&gt;</code>",
           "options": [
             {
               "text": "AB",
@@ -1876,7 +1876,7 @@
         },
         {
           "id": 17,
-          "text": "What will be the output of the following code snippet?\n\n<?php\n$x=10;\nfunction test() {\nglobal $x;\n$x+=5\nreturn $x;\n}\necho test()+$x;\n?>",
+          "text": "What will be the output of the following code snippet?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$x = 10;<br>function test() {<br>global $x;<br>$x += 5;<br>return $x;<br>}<br>echo test() + $x;<br>?&gt;</code>",
           "options": [
             {
               "text": "20",
@@ -1905,7 +1905,7 @@
         },
         {
           "id": 18,
-          "text": "What will the following code output if the connection fails?",
+          "text": "What will the following code output if the connection fails?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$conn = mysqli_connect(\"localhost\", \"username\", \"password\", \"database\");<br>if (!$conn) {<br>die(\"Connection failed: \" . mysqli_connect_error());<br>}<br>?&gt;</code>",
           "options": [
             {
               "text": "Connection successful",
@@ -1992,7 +1992,7 @@
         },
         {
           "id": 21,
-          "text": "What will the following code output if the file example.txt does not exist?",
+          "text": "What will the following code output if the file example.txt does not exist?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$file = fopen(\"example.txt\", \"r\");<br>if (!$file) {<br>die(\"File not found!\");<br>}<br>?&gt;</code>",
           "options": [
             {
               "text": "File not found!",
@@ -2050,7 +2050,7 @@
         },
         {
           "id": 23,
-          "text": "What will the following code output if example.txt contains \"Hello World\"?\n\n<?php\n$file = fopen(\"example.txt\", \"r\");\n$line = fgets($file);\nfclose($file);\necho $line;\n?>",
+          "text": "What will the following code output if example.txt contains \"Hello World\"?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>$file = fopen(\"example.txt\", \"r\");<br>$line = fgets($file);<br>fclose($file);<br>echo $line;<br>?&gt;</code>",
           "options": [
             {
               "text": "Hello World",
@@ -2166,7 +2166,7 @@
         },
         {
           "id": 27,
-          "text": "What is the result of calling the function below without any arguments?\n\n<?php\nfunction test(...$args) {\nreturn count($args);\n}\necho test();\n?>",
+          "text": "What is the result of calling the function below without any arguments?<br><code class='ltr' style='display:block; background:#f0f0f0; padding:10px; margin:10px 0; font-family:monospace;'>&lt;?php<br>function test(...$args) {<br>return count($args);<br>}<br>echo test();<br>?&gt;</code>",
           "options": [
             {
               "text": "0",
